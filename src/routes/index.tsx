@@ -204,7 +204,7 @@ function Hero() {
               <div className="w-12 h-12 rounded-full bg-forest-deep grid place-items-center text-cream font-display">★</div>
               <div className="flex-1">
                 <div className="text-xs font-semibold text-moss uppercase tracking-wider">Featured</div>
-                <div className="font-display text-forest-deep font-semibold">Vedaas Pure Greens — 200 g</div>
+                <div className="font-display text-forest-deep font-semibold">ગ્રીન જ્યુસ પાવડર — 200 g</div>
               </div>
               <div className="font-display text-lg text-forest-deep font-semibold">₹ 699</div>
             </div>
