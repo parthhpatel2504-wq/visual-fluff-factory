@@ -185,7 +185,7 @@ function Hero() {
             </a>
           </div>
           <dl className="grid grid-cols-3 gap-6 pt-8 border-t border-border max-w-md">
-            <Stat k="3" v="Core products" />
+            <Stat k="8" v="Core products" />
             <Stat k="100%" v="Natural blend" />
             <Stat k="Free" v="Delivery" />
           </dl>
