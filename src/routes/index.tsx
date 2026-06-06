@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { createContext, useContext, useState } from "react";
 import heroImg from "@/assets/hero-greens.jpg";
 import ritualImg from "@/assets/ritual.jpg";
 import pGreenJuice from "@/assets/p-green-juice.jpg.asset.json";
@@ -15,140 +15,337 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const products = [
+/* ---------- I18N ---------- */
+type Lang = "en" | "gu";
+const LangCtx = createContext<{ lang: Lang; setLang: (l: Lang) => void }>({
+  lang: "en",
+  setLang: () => {},
+});
+const useLang = () => useContext(LangCtx);
+
+type Bi = { en: string; gu: string };
+const T: Record<string, Bi> = {
+  nav_products: { en: "Products", gu: "ઉત્પાદનો" },
+  nav_ritual: { en: "Ritual", gu: "દિનચર્યા" },
+  nav_story: { en: "Story", gu: "અમારી વાત" },
+  nav_order: { en: "Order", gu: "ઓર્ડર" },
+  cta_order_now: { en: "Order now", gu: "હમણાં ઓર્ડર કરો" },
+  hero_eyebrow: { en: "Crafted in Ahmedabad · Since 2021", gu: "અમદાવાદમાં બનાવેલ · ૨૦૨૧ થી" },
+  hero_h1_a: { en: "Drink green.", gu: "લીલું પીઓ." },
+  hero_h1_b: { en: "Live clean.", gu: "શુદ્ધ જીવો." },
+  hero_p: {
+    en: "Eight honest wellness rituals — powders, juices and tablets made from real plants, with nothing you can't pronounce.",
+    gu: "આઠ સાચા આયુર્વેદિક ઉપાયો — શુદ્ધ વનસ્પતિઓમાંથી બનેલા પાવડર, જ્યુસ અને ગોળીઓ. કોઈ બનાવટી તત્વ નહીં.",
+  },
+  hero_btn_explore: { en: "Explore the range", gu: "આખી રેન્જ જુઓ" },
+  hero_btn_whatsapp: { en: "Order on WhatsApp", gu: "WhatsApp પર ઓર્ડર કરો" },
+  stat_products: { en: "Core products", gu: "મુખ્ય ઉત્પાદનો" },
+  stat_natural: { en: "Natural blend", gu: "કુદરતી મિશ્રણ" },
+  stat_delivery: { en: "Delivery", gu: "ડિલિવરી" },
+  stat_free: { en: "Free", gu: "મફત" },
+  featured: { en: "Featured", gu: "ખાસ" },
+  promise_1_t: { en: "Real plants", gu: "સાચી વનસ્પતિ" },
+  promise_1_b: { en: "Sourced from trusted Indian farms — never synthetic.", gu: "વિશ્વસનીય ભારતીય ખેતરોમાંથી — ક્યારેય બનાવટી નહીં." },
+  promise_2_t: { en: "No fillers", gu: "કોઈ ભેળસેળ નહીં" },
+  promise_2_b: { en: "Zero sugar, no preservatives, no artificial colors.", gu: "શૂન્ય સાકર, કોઈ પ્રિઝર્વેટિવ નહીં, કોઈ કૃત્રિમ રંગ નહીં." },
+  promise_3_t: { en: "Small batches", gu: "નાના બેચ" },
+  promise_3_b: { en: "Made fresh, packed by hand, delivered quickly.", gu: "તાજું બનાવેલ, હાથે પેક કરેલ, ઝડપથી પહોંચાડેલ." },
+  promise_4_t: { en: "Honest pricing", gu: "સાચી કિંમત" },
+  promise_4_b: { en: "Direct-to-you. No middlemen, no inflated markups.", gu: "સીધું તમને. વચ્ચે કોઈ દલાલ નહીં, વધેલા ભાવ નહીં." },
+  range_eyebrow: { en: "The Range", gu: "અમારી રેન્જ" },
+  range_h2_a: { en: "Eight rituals.", gu: "આઠ દિનચર્યા." },
+  range_h2_b: { en: "One simple promise.", gu: "એક સરળ વચન." },
+  order_this: { en: "Order this", gu: "આ ઓર્ડર કરો" },
+  ritual_eyebrow: { en: "A Simple Daily Ritual", gu: "સરળ રોજિંદી દિનચર્યા" },
+  ritual_h2: { en: "Three minutes, three times a day.", gu: "ત્રણ મિનિટ, દિવસમાં ત્રણ વાર." },
+  ritual_1_t: { en: "Start your morning", gu: "સવારની શરૂઆત" },
+  ritual_1_b: {
+    en: "One teaspoon of Green Juice Powder in a glass of cool water. Stir, sip, smile.",
+    gu: "એક ચમચી ગ્રીન જ્યુસ પાવડર ઠંડા પાણીના ગ્લાસમાં. હલાવો, પીઓ, સ્મિત કરો.",
+  },
+  ritual_2_t: { en: "After heavy meals", gu: "ભારે ભોજન પછી" },
+  ritual_2_b: {
+    en: "A small spoon of Acidity & Gas Relief Powder with warm water settles digestion within minutes.",
+    gu: "નાની ચમચી એસિડિટી ગેસ પાવડર ગરમ પાણી સાથે — થોડી જ મિનિટોમાં પાચન સુધારે.",
+  },
+  ritual_3_t: { en: "Evening reset", gu: "સાંજનો રિસેટ" },
+  ritual_3_b: {
+    en: "30 ml of Seabuckthorn Juice diluted in water — for immunity and glowing skin.",
+    gu: "૩૦ મિ.લી. સી-બકથૉર્ન જ્યુસ પાણીમાં ભેળવીને — રોગપ્રતિકારકતા અને ચમકતી ત્વચા માટે.",
+  },
+  story_eyebrow: { en: "Our Story", gu: "અમારી વાત" },
+  story_h2_a: { en: "Wellness shouldn't be", gu: "આરોગ્ય હોવું જોઈએ" },
+  story_h2_b: { en: "complicated.", gu: "સરળ." },
+  story_p: {
+    en: "Vedaas began in a small kitchen in Ahmedabad with a single belief — that the best things for your body are also the simplest. We work directly with Indian farms, blend in small batches and ship within days. No marketing tricks, no synthetic shortcuts. Just clean green nutrition that fits into the life you already live.",
+    gu: "વેદાસની શરૂઆત અમદાવાદના એક નાના રસોડામાં થઈ — એક માન્યતા સાથે કે શરીર માટે જે શ્રેષ્ઠ છે તે જ સૌથી સરળ પણ છે. અમે ભારતીય ખેડૂતો સાથે સીધું કામ કરીએ છીએ, નાના બેચમાં મિશ્રણ કરીએ છીએ અને થોડા દિવસોમાં મોકલીએ છીએ. કોઈ માર્કેટિંગની જાળ નહીં, કોઈ બનાવટી શોર્ટકટ નહીં — બસ શુદ્ધ આયુર્વેદિક પોષણ.",
+  },
+  badge_fssai: { en: "FSSAI Certified", gu: "FSSAI પ્રમાણિત" },
+  badge_made: { en: "Made in India", gu: "ભારતમાં બનેલ" },
+  badge_vegan: { en: "Vegan", gu: "વેગન" },
+  order_eyebrow: { en: "Place your order", gu: "તમારો ઓર્ડર મૂકો" },
+  order_h2_a: { en: "One message.", gu: "એક મેસેજ." },
+  order_h2_b: { en: "Delivered to your door.", gu: "તમારા ઘરે ડિલિવર." },
+  order_p: {
+    en: "We take orders via WhatsApp — quick, personal, and zero account-signups. Send us the form below or message directly.",
+    gu: "અમે WhatsApp દ્વારા ઓર્ડર લઈએ છીએ — ઝડપી, વ્યક્તિગત, કોઈ એકાઉન્ટ બનાવ્યા વગર. નીચેનું ફોર્મ ભરો અથવા સીધો મેસેજ કરો.",
+  },
+  meta_whatsapp: { en: "WhatsApp", gu: "WhatsApp" },
+  meta_email: { en: "Email", gu: "ઈમેલ" },
+  meta_shipping_l: { en: "Shipping", gu: "શિપિંગ" },
+  meta_shipping_v: { en: "Free across India · 2–4 days", gu: "આખા ભારતમાં મફત · ૨–૪ દિવસ" },
+  meta_hours_l: { en: "Hours", gu: "સમય" },
+  meta_hours_v: { en: "Mon — Sat · 10 am to 7 pm IST", gu: "સોમ — શનિ · સવારે ૧૦ થી સાંજે ૭" },
+  field_name: { en: "Your name", gu: "તમારું નામ" },
+  field_product: { en: "Product", gu: "ઉત્પાદન" },
+  field_qty: { en: "Quantity", gu: "જથ્થો" },
+  field_city: { en: "City", gu: "શહેર" },
+  field_notes: { en: "Notes (optional)", gu: "નોંધ (વૈકલ્પિક)" },
+  field_notes_ph: { en: "Anything we should know?", gu: "કંઈ ખાસ જણાવવું છે?" },
+  submit_btn: { en: "Send order on WhatsApp →", gu: "WhatsApp પર ઓર્ડર મોકલો →" },
+  footer_tagline: { en: "Pure Green Nutrition", gu: "શુદ્ધ આયુર્વેદિક પોષણ" },
+  footer_copy_loc: { en: "Ahmedabad, India", gu: "અમદાવાદ, ભારત" },
+};
+
+const t = (k: keyof typeof T, lang: Lang) => T[k][lang];
+
+type ProductBi = {
+  id: string;
+  name: string;
+  tagline: Bi;
+  description: Bi;
+  image: string;
+  notes: Bi[];
+  price: string;
+  size: Bi;
+};
+
+const products: ProductBi[] = [
   {
     id: "green-juice",
     name: "ગ્રીન જ્યુસ પાવડર",
-    tagline: "Green Juice Powder",
-    description:
-      "Dehydrated green leaves powder — a blend of spinach, mint, neem, wheatgrass, tulsi, amla and moringa. One spoon daily for natural energy and detox.",
+    tagline: { en: "Green Juice Powder", gu: "ગ્રીન જ્યુસ પાવડર" },
+    description: {
+      en: "Dehydrated green leaves powder — a blend of spinach, mint, neem, wheatgrass, tulsi, amla and moringa. One spoon daily for natural energy and detox.",
+      gu: "સુકવેલા લીલા પાનનો પાવડર — પાલક, ફુદીનો, લીમડો, ઘઉંના ઘાસ, તુલસી, આમળા અને સરગવાનું મિશ્રણ. દરરોજ એક ચમચી — કુદરતી ઊર્જા અને ડિટોક્સ માટે.",
+    },
     image: pGreenJuice.url,
-    notes: ["Spinach", "Wheatgrass", "Moringa", "Tulsi"],
+    notes: [
+      { en: "Spinach", gu: "પાલક" },
+      { en: "Wheatgrass", gu: "ઘઉંના ઘાસ" },
+      { en: "Moringa", gu: "સરગવો" },
+      { en: "Tulsi", gu: "તુલસી" },
+    ],
     price: "₹ 699",
-    size: "200 g",
+    size: { en: "200 g", gu: "૨૦૦ ગ્રામ" },
   },
   {
     id: "acidity-gas",
     name: "એસિડિટી ગેસ પાવડર",
-    tagline: "Acidity & Gas Relief Powder",
-    description:
-      "An Ayurvedic blend of fennel, coriander, methi, ajwain, jeera and black pepper that soothes acidity, gas and bloating naturally.",
+    tagline: { en: "Acidity & Gas Relief Powder", gu: "એસિડિટી અને ગેસ રાહત પાવડર" },
+    description: {
+      en: "An Ayurvedic blend of fennel, coriander, methi, ajwain, jeera and black pepper that soothes acidity, gas and bloating naturally.",
+      gu: "વરિયાળી, ધાણા, મેથી, અજમો, જીરું અને કાળા મરીનું આયુર્વેદિક મિશ્રણ — એસિડિટી, ગેસ અને ભારેપણાને કુદરતી રીતે શાંત કરે.",
+    },
     image: pAcidity.url,
-    notes: ["Fennel", "Coriander", "Ajwain", "Jeera"],
+    notes: [
+      { en: "Fennel", gu: "વરિયાળી" },
+      { en: "Coriander", gu: "ધાણા" },
+      { en: "Ajwain", gu: "અજમો" },
+      { en: "Jeera", gu: "જીરું" },
+    ],
     price: "₹ 449",
-    size: "200 g",
+    size: { en: "200 g", gu: "૨૦૦ ગ્રામ" },
   },
   {
     id: "seabuckthorn",
     name: "VEDAAS सी-बकथॉर्न जूस",
-    tagline: "Seabuckthorn Juice",
-    description:
-      "100% natural & herbal sea buckthorn juice — rich in Vitamin C & A, antioxidants and Omega 3, 6, 7, 9 for immunity and glowing skin.",
+    tagline: { en: "Seabuckthorn Juice", gu: "સી-બકથૉર્ન જ્યુસ" },
+    description: {
+      en: "100% natural & herbal sea buckthorn juice — rich in Vitamin C & A, antioxidants and Omega 3, 6, 7, 9 for immunity and glowing skin.",
+      gu: "૧૦૦% કુદરતી અને હર્બલ સી-બકથૉર્ન જ્યુસ — વિટામિન C અને A, એન્ટિઓક્સિડન્ટ્સ અને ઓમેગા ૩,૬,૭,૯ થી ભરપૂર. રોગપ્રતિકારકતા અને ચમકતી ત્વચા માટે.",
+    },
     image: pSeabuckthorn.url,
-    notes: ["Omega 3,6,7,9", "Vitamin C", "Antioxidants"],
+    notes: [
+      { en: "Omega 3,6,7,9", gu: "ઓમેગા ૩,૬,૭,૯" },
+      { en: "Vitamin C", gu: "વિટામિન C" },
+      { en: "Antioxidants", gu: "એન્ટિઓક્સિડન્ટ્સ" },
+    ],
     price: "₹ 395",
-    size: "100 ml",
+    size: { en: "100 ml", gu: "૧૦૦ મિ.લી." },
   },
   {
     id: "moringa-leaves-powder",
     name: "સરગવાના પાન નો પાવડર",
-    tagline: "Moringa Leaves Powder",
-    description:
-      "Pure moringa leaves powder — rich in natural vitamins, minerals and antioxidants. Supports daily nutrition, immunity and overall wellness.",
+    tagline: { en: "Moringa Leaves Powder", gu: "સરગવાના પાનનો પાવડર" },
+    description: {
+      en: "Pure moringa leaves powder — rich in natural vitamins, minerals and antioxidants. Supports daily nutrition, immunity and overall wellness.",
+      gu: "શુદ્ધ સરગવાના પાનનો પાવડર — કુદરતી વિટામિન, ખનિજ અને એન્ટિઓક્સિડન્ટ્સથી ભરપૂર. રોજિંદા પોષણ, રોગપ્રતિકારકતા અને સંપૂર્ણ આરોગ્ય માટે.",
+    },
     image: pMoringaLeavesPowder.url,
-    notes: ["Vitamins", "Minerals", "Antioxidants"],
+    notes: [
+      { en: "Vitamins", gu: "વિટામિન" },
+      { en: "Minerals", gu: "ખનિજ" },
+      { en: "Antioxidants", gu: "એન્ટિઓક્સિડન્ટ્સ" },
+    ],
     price: "₹ 250",
-    size: "200 g",
+    size: { en: "200 g", gu: "૨૦૦ ગ્રામ" },
   },
   {
     id: "moringa-leaves-tablets",
     name: "💊 સરગવાના પાન ગોળી",
-    tagline: "Moringa Leaves Tablets",
-    description:
-      "Convenient tablet form of moringa leaf nutrition. Helps support immunity, stamina, metabolism and everyday health.",
+    tagline: { en: "Moringa Leaves Tablets", gu: "સરગવાના પાનની ગોળી" },
+    description: {
+      en: "Convenient tablet form of moringa leaf nutrition. Helps support immunity, stamina, metabolism and everyday health.",
+      gu: "સરગવાના પાનનું પોષણ સરળ ગોળી રૂપે. રોગપ્રતિકારકતા, શક્તિ, ચયાપચય અને રોજિંદા આરોગ્ય માટે મદદરૂપ.",
+    },
     image: pMoringaLeavesTablets.url,
-    notes: ["Immunity", "Stamina", "Metabolism"],
+    notes: [
+      { en: "Immunity", gu: "રોગપ્રતિકારકતા" },
+      { en: "Stamina", gu: "શક્તિ" },
+      { en: "Metabolism", gu: "ચયાપચય" },
+    ],
     price: "₹ 250",
-    size: "180 Tablets",
+    size: { en: "180 Tablets", gu: "૧૮૦ ગોળી" },
   },
   {
     id: "moringa-pods-powder",
     name: "🌱 સરગવાના શિંગ નો પાવડર",
-    tagline: "Moringa Pods Powder",
-    description:
-      "Made from moringa pods. Provides natural plant nutrients that support digestion, vitality and balanced nutrition.",
+    tagline: { en: "Moringa Pods Powder", gu: "સરગવાની શિંગનો પાવડર" },
+    description: {
+      en: "Made from moringa pods. Provides natural plant nutrients that support digestion, vitality and balanced nutrition.",
+      gu: "સરગવાની શિંગમાંથી બનાવેલ. પાચન, સ્ફૂર્તિ અને સંતુલિત પોષણને ટેકો આપતા કુદરતી તત્વો.",
+    },
     image: pMoringaPodsPowder.url,
-    notes: ["Digestion", "Vitality", "Plant Nutrients"],
+    notes: [
+      { en: "Digestion", gu: "પાચન" },
+      { en: "Vitality", gu: "સ્ફૂર્તિ" },
+      { en: "Plant Nutrients", gu: "વનસ્પતિ તત્વો" },
+    ],
     price: "₹ 250",
-    size: "200 g",
+    size: { en: "200 g", gu: "૨૦૦ ગ્રામ" },
   },
   {
     id: "moringa-pods-tablets",
     name: "💊 સરગવા ની શિંગ ગોળી",
-    tagline: "Moringa Pods Tablets",
-    description:
-      "Easy-to-consume moringa pod tablets. Supports daily wellness, digestive health and nutritional balance.",
+    tagline: { en: "Moringa Pods Tablets", gu: "સરગવાની શિંગની ગોળી" },
+    description: {
+      en: "Easy-to-consume moringa pod tablets. Supports daily wellness, digestive health and nutritional balance.",
+      gu: "સરળતાથી લઈ શકાય તેવી સરગવાની શિંગની ગોળી. રોજિંદા આરોગ્ય, પાચન અને પોષણના સંતુલન માટે.",
+    },
     image: pMoringaPodsTablets.url,
-    notes: ["Wellness", "Digestion", "Balance"],
+    notes: [
+      { en: "Wellness", gu: "આરોગ્ય" },
+      { en: "Digestion", gu: "પાચન" },
+      { en: "Balance", gu: "સંતુલન" },
+    ],
     price: "₹ 250",
-    size: "180 Tablets",
+    size: { en: "180 Tablets", gu: "૧૮૦ ગોળી" },
   },
   {
     id: "malashuddhi",
     name: "🟤 મળશુદ્ધિ ટેબલેટ",
-    tagline: "Malashuddhi Tablets",
-    description:
-      "Traditionally used for digestive support and bowel regularity. Helps maintain digestive comfort and routine wellness.",
+    tagline: { en: "Malashuddhi Tablets", gu: "મળશુદ્ધિ ટેબલેટ" },
+    description: {
+      en: "Traditionally used for digestive support and bowel regularity. Helps maintain digestive comfort and routine wellness.",
+      gu: "પાચન અને કબજિયાતમાં રાહત માટે પારંપરિક રીતે ઉપયોગી. દૈનિક પાચન આરામ અને નિયમિતતા જાળવે.",
+    },
     image: pMalashuddhi.url,
-    notes: ["Digestive", "Bowel Care", "Routine"],
+    notes: [
+      { en: "Digestive", gu: "પાચન" },
+      { en: "Bowel Care", gu: "કબજિયાત રાહત" },
+      { en: "Routine", gu: "નિયમિતતા" },
+    ],
     price: "₹ 200",
-    size: "50 Tablets",
+    size: { en: "50 Tablets", gu: "૫૦ ગોળી" },
   },
 ];
 
 function Index() {
+  const [lang, setLang] = useState<Lang>("en");
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Nav />
-      <Hero />
-      <Promise />
-      <Products />
-      <Ritual />
-      <Story />
-      <Order />
-      <Footer />
-      <WhatsAppFloat />
+    <LangCtx.Provider value={{ lang, setLang }}>
+      <div className="min-h-screen bg-background text-foreground" lang={lang}>
+        <Nav />
+        <Hero />
+        <Promise />
+        <Products />
+        <Ritual />
+        <Story />
+        <Order />
+        <Footer />
+        <WhatsAppFloat />
+      </div>
+    </LangCtx.Provider>
+  );
+}
+
+/* ---------- LANG TOGGLE ---------- */
+function LangToggle({ compact = false }: { compact?: boolean }) {
+  const { lang, setLang } = useLang();
+  return (
+    <div
+      className={`inline-flex items-center rounded-full border border-forest-deep/20 bg-cream/70 p-0.5 text-xs font-semibold ${
+        compact ? "" : ""
+      }`}
+      role="group"
+      aria-label="Language"
+    >
+      <button
+        type="button"
+        onClick={() => setLang("en")}
+        className={`px-3 py-1.5 rounded-full transition ${
+          lang === "en" ? "bg-forest-deep text-cream" : "text-forest-deep hover:bg-forest-deep/5"
+        }`}
+        aria-pressed={lang === "en"}
+      >
+        EN
+      </button>
+      <button
+        type="button"
+        onClick={() => setLang("gu")}
+        className={`px-3 py-1.5 rounded-full transition ${
+          lang === "gu" ? "bg-forest-deep text-cream" : "text-forest-deep hover:bg-forest-deep/5"
+        }`}
+        aria-pressed={lang === "gu"}
+      >
+        ગુજરાતી
+      </button>
     </div>
   );
 }
 
 /* ---------- NAV ---------- */
 function Nav() {
+  const { lang } = useLang();
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 backdrop-blur-md bg-background/80">
-      <div className="container-x flex items-center justify-between py-4">
-        <a href="#" className="flex items-center gap-3">
+      <div className="container-x flex items-center justify-between py-4 gap-3">
+        <a href="#" className="flex items-center gap-3 shrink-0">
           <div className="grid place-items-center w-10 h-10 rounded-full bg-forest-deep text-cream font-display font-bold">
             V
           </div>
           <div className="leading-tight">
             <div className="font-display font-semibold text-lg text-forest-deep">Vedaas</div>
-            <div className="eyebrow text-[0.6rem]">Pure Green Nutrition</div>
+            <div className="eyebrow text-[0.6rem]">{t("footer_tagline", lang)}</div>
           </div>
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/75">
-          <a href="#products" className="hover:text-forest-deep transition">Products</a>
-          <a href="#ritual" className="hover:text-forest-deep transition">Ritual</a>
-          <a href="#story" className="hover:text-forest-deep transition">Story</a>
-          <a href="#order" className="hover:text-forest-deep transition">Order</a>
+          <a href="#products" className="hover:text-forest-deep transition">{t("nav_products", lang)}</a>
+          <a href="#ritual" className="hover:text-forest-deep transition">{t("nav_ritual", lang)}</a>
+          <a href="#story" className="hover:text-forest-deep transition">{t("nav_story", lang)}</a>
+          <a href="#order" className="hover:text-forest-deep transition">{t("nav_order", lang)}</a>
         </nav>
-        <a
-          href="#order"
-          className="inline-flex items-center gap-2 rounded-full bg-forest-deep px-5 py-2.5 text-sm font-medium text-cream hover:bg-forest transition shadow-soft"
-        >
-          Order now
-          <span aria-hidden>→</span>
-        </a>
+        <div className="flex items-center gap-3">
+          <LangToggle />
+          <a
+            href="#order"
+            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-forest-deep px-5 py-2.5 text-sm font-medium text-cream hover:bg-forest transition shadow-soft"
+          >
+            {t("cta_order_now", lang)}
+            <span aria-hidden>→</span>
+          </a>
+        </div>
       </div>
     </header>
   );
@@ -156,38 +353,36 @@ function Nav() {
 
 /* ---------- HERO ---------- */
 function Hero() {
+  const { lang } = useLang();
   return (
     <section className="relative overflow-hidden">
       <div className="container-x grid lg:grid-cols-12 gap-12 lg:gap-8 pt-16 lg:pt-24 pb-20 lg:pb-28 items-center">
         <div className="lg:col-span-6 space-y-7">
-          <div className="eyebrow">Crafted in Ahmedabad · Since 2021</div>
+          <div className="eyebrow">{t("hero_eyebrow", lang)}</div>
           <h1 className="font-display font-semibold text-5xl md:text-6xl lg:text-7xl leading-[1.02] text-forest-deep">
-            Drink green.
+            {t("hero_h1_a", lang)}
             <br />
-            <span className="italic font-normal text-moss">Live clean.</span>
+            <span className="italic font-normal text-moss">{t("hero_h1_b", lang)}</span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">
-            Three honest wellness rituals — green juice powder, acidity relief and sea buckthorn juice — made from
-            real plants, with nothing you can&apos;t pronounce.
-          </p>
+          <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">{t("hero_p", lang)}</p>
           <div className="flex flex-wrap gap-3 pt-2">
             <a
               href="#products"
               className="inline-flex items-center gap-2 rounded-full bg-forest-deep px-7 py-3.5 text-sm font-medium text-cream hover:bg-forest transition shadow-lift"
             >
-              Explore the range
+              {t("hero_btn_explore", lang)}
             </a>
             <a
               href="#order"
               className="inline-flex items-center gap-2 rounded-full border border-forest-deep/20 px-7 py-3.5 text-sm font-medium text-forest-deep hover:bg-forest-deep hover:text-cream transition"
             >
-              Order on WhatsApp
+              {t("hero_btn_whatsapp", lang)}
             </a>
           </div>
           <dl className="grid grid-cols-3 gap-6 pt-8 border-t border-border max-w-md">
-            <Stat k="8" v="Core products" />
-            <Stat k="100%" v="Natural blend" />
-            <Stat k="Free" v="Delivery" />
+            <Stat k="8" v={t("stat_products", lang)} />
+            <Stat k="100%" v={t("stat_natural", lang)} />
+            <Stat k={t("stat_free", lang)} v={t("stat_delivery", lang)} />
           </dl>
         </div>
 
@@ -203,8 +398,10 @@ function Hero() {
             <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-cream/95 backdrop-blur p-5 flex items-center gap-4 shadow-soft">
               <div className="w-12 h-12 rounded-full bg-forest-deep grid place-items-center text-cream font-display">★</div>
               <div className="flex-1">
-                <div className="text-xs font-semibold text-moss uppercase tracking-wider">Featured</div>
-                <div className="font-display text-forest-deep font-semibold">ગ્રીન જ્યુસ પાવડર — 200 g</div>
+                <div className="text-xs font-semibold text-moss uppercase tracking-wider">{t("featured", lang)}</div>
+                <div className="font-display text-forest-deep font-semibold">
+                  ગ્રીન જ્યુસ પાવડર — {products[0].size[lang]}
+                </div>
               </div>
               <div className="font-display text-lg text-forest-deep font-semibold">₹ 699</div>
             </div>
@@ -226,13 +423,14 @@ function Stat({ k, v }: { k: string; v: string }) {
   );
 }
 
-/* ---------- PROMISE (full-width band) ---------- */
+/* ---------- PROMISE ---------- */
 function Promise() {
+  const { lang } = useLang();
   const items = [
-    { title: "Real plants", body: "Sourced from trusted Indian farms — never synthetic." },
-    { title: "No fillers", body: "Zero sugar, no preservatives, no artificial colors." },
-    { title: "Small batches", body: "Made fresh, packed by hand, delivered quickly." },
-    { title: "Honest pricing", body: "Direct-to-you. No middlemen, no inflated markups." },
+    { title: t("promise_1_t", lang), body: t("promise_1_b", lang) },
+    { title: t("promise_2_t", lang), body: t("promise_2_b", lang) },
+    { title: t("promise_3_t", lang), body: t("promise_3_b", lang) },
+    { title: t("promise_4_t", lang), body: t("promise_4_b", lang) },
   ];
   return (
     <section className="bg-forest-deep text-cream py-20">
@@ -253,14 +451,15 @@ function Promise() {
 
 /* ---------- PRODUCTS ---------- */
 function Products() {
+  const { lang } = useLang();
   return (
     <section id="products" className="py-24 lg:py-32">
       <div className="container-x">
         <div className="max-w-2xl mb-16">
-          <div className="eyebrow mb-4">The Range</div>
+          <div className="eyebrow mb-4">{t("range_eyebrow", lang)}</div>
           <h2 className="font-display text-4xl md:text-5xl text-forest-deep leading-tight">
-            Eight rituals.<br />
-            <span className="italic text-moss font-normal">One simple promise.</span>
+            {t("range_h2_a", lang)}<br />
+            <span className="italic text-moss font-normal">{t("range_h2_b", lang)}</span>
           </h2>
         </div>
 
@@ -284,22 +483,22 @@ function Products() {
                   />
                 </div>
                 <div className="absolute -bottom-4 -right-4 rounded-2xl bg-cream px-5 py-3 shadow-soft border border-border">
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground">{p.size}</div>
+                  <div className="text-xs uppercase tracking-wider text-muted-foreground">{p.size[lang]}</div>
                   <div className="font-display text-xl text-forest-deep font-semibold">{p.price}</div>
                 </div>
               </div>
 
               <div className="space-y-6">
-                <div className="eyebrow">{`0${i + 1} · ${p.tagline}`}</div>
+                <div className="eyebrow">{`0${i + 1} · ${p.tagline[lang]}`}</div>
                 <h3 className="font-display text-3xl md:text-4xl text-forest-deep">{p.name}</h3>
-                <p className="text-muted-foreground text-lg leading-relaxed">{p.description}</p>
+                <p className="text-muted-foreground text-lg leading-relaxed">{p.description[lang]}</p>
                 <div className="flex flex-wrap gap-2 pt-2">
                   {p.notes.map((n) => (
                     <span
-                      key={n}
+                      key={n.en}
                       className="rounded-full border border-forest-deep/15 bg-cream px-4 py-1.5 text-xs font-medium text-forest-deep"
                     >
-                      {n}
+                      {n[lang]}
                     </span>
                   ))}
                 </div>
@@ -308,7 +507,7 @@ function Products() {
                     href="#order"
                     className="inline-flex items-center gap-2 text-sm font-semibold text-forest-deep border-b-2 border-ember pb-1 hover:gap-3 transition-all"
                   >
-                    Order this <span aria-hidden>→</span>
+                    {t("order_this", lang)} <span aria-hidden>→</span>
                   </a>
                 </div>
               </div>
@@ -322,11 +521,12 @@ function Products() {
 
 /* ---------- RITUAL ---------- */
 function Ritual() {
+  const { lang } = useLang();
   const [step, setStep] = useState(0);
   const steps = [
-    { t: "Start your morning", b: "One teaspoon of Vedaas Pure Greens in a glass of cool water. Stir, sip, smile." },
-    { t: "After heavy meals", b: "A small spoon of Acidity Relief powder with warm water settles digestion within minutes." },
-    { t: "Evening reset", b: "30 ml of Sea Buckthorn Juice diluted in water — for immunity and glowing skin." },
+    { t: t("ritual_1_t", lang), b: t("ritual_1_b", lang) },
+    { t: t("ritual_2_t", lang), b: t("ritual_2_b", lang) },
+    { t: t("ritual_3_t", lang), b: t("ritual_3_b", lang) },
   ];
   return (
     <section id="ritual" className="relative bg-cream-2/60 py-24 lg:py-32 overflow-hidden">
@@ -342,9 +542,9 @@ function Ritual() {
           />
         </div>
         <div className="order-1 lg:order-2">
-          <div className="eyebrow mb-4">A Simple Daily Ritual</div>
+          <div className="eyebrow mb-4">{t("ritual_eyebrow", lang)}</div>
           <h2 className="font-display text-4xl md:text-5xl text-forest-deep leading-tight mb-8">
-            Three minutes, three times a day.
+            {t("ritual_h2", lang)}
           </h2>
           <div className="space-y-3">
             {steps.map((s, i) => (
@@ -381,27 +581,23 @@ function Ritual() {
 
 /* ---------- STORY ---------- */
 function Story() {
+  const { lang } = useLang();
   return (
     <section id="story" className="py-24 lg:py-32">
       <div className="container-x">
         <div className="max-w-3xl mx-auto text-center space-y-6">
-          <div className="eyebrow">Our Story</div>
+          <div className="eyebrow">{t("story_eyebrow", lang)}</div>
           <h2 className="font-display text-4xl md:text-5xl text-forest-deep leading-tight">
-            Wellness shouldn&apos;t be{" "}
-            <span className="italic text-moss font-normal">complicated.</span>
+            {t("story_h2_a", lang)}{" "}
+            <span className="italic text-moss font-normal">{t("story_h2_b", lang)}</span>
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Vedaas began in a small kitchen in Ahmedabad with a single belief — that the best things for your body
-            are also the simplest. We work directly with Indian farms, blend in small batches and ship within days.
-            No marketing tricks, no synthetic shortcuts. Just clean green nutrition that fits into the life you
-            already live.
-          </p>
+          <p className="text-lg text-muted-foreground leading-relaxed">{t("story_p", lang)}</p>
           <div className="pt-4 flex justify-center gap-3 text-xs uppercase tracking-wider text-muted-foreground">
-            <span>FSSAI Certified</span>
+            <span>{t("badge_fssai", lang)}</span>
             <span aria-hidden>·</span>
-            <span>Made in India</span>
+            <span>{t("badge_made", lang)}</span>
             <span aria-hidden>·</span>
-            <span>Vegan</span>
+            <span>{t("badge_vegan", lang)}</span>
           </div>
         </div>
       </div>
@@ -411,6 +607,7 @@ function Story() {
 
 /* ---------- ORDER ---------- */
 function Order() {
+  const { lang } = useLang();
   return (
     <section id="order" className="relative py-24 lg:py-32 bg-forest-deep text-cream overflow-hidden">
       <div
@@ -422,20 +619,17 @@ function Order() {
       />
       <div className="container-x relative grid lg:grid-cols-2 gap-14">
         <div className="space-y-6">
-          <div className="eyebrow text-ember">Place your order</div>
+          <div className="eyebrow text-ember">{t("order_eyebrow", lang)}</div>
           <h2 className="font-display text-4xl md:text-5xl text-cream leading-tight">
-            One message.<br />
-            <span className="italic font-normal text-sage">Delivered to your door.</span>
+            {t("order_h2_a", lang)}<br />
+            <span className="italic font-normal text-sage">{t("order_h2_b", lang)}</span>
           </h2>
-          <p className="text-cream/75 text-lg max-w-md leading-relaxed">
-            We take orders via WhatsApp — quick, personal, and zero account-signups. Send us the form below or
-            message directly.
-          </p>
+          <p className="text-cream/75 text-lg max-w-md leading-relaxed">{t("order_p", lang)}</p>
           <div className="space-y-4 pt-4">
-            <Meta label="WhatsApp" value="+91 98xxxxxx00" />
-            <Meta label="Email" value="orders@vedaas.in" />
-            <Meta label="Shipping" value="Free across India · 2–4 days" />
-            <Meta label="Hours" value="Mon — Sat · 10 am to 7 pm IST" />
+            <Meta label={t("meta_whatsapp", lang)} value="+91 98xxxxxx00" />
+            <Meta label={t("meta_email", lang)} value="orders@vedaas.in" />
+            <Meta label={t("meta_shipping_l", lang)} value={t("meta_shipping_v", lang)} />
+            <Meta label={t("meta_hours_l", lang)} value={t("meta_hours_v", lang)} />
           </div>
         </div>
 
@@ -454,22 +648,22 @@ function Order() {
           }}
           className="rounded-3xl bg-cream text-foreground p-7 lg:p-9 shadow-lift space-y-4"
         >
-          <Field name="name" label="Your name" placeholder="Aanya Shah" required />
+          <Field name="name" label={t("field_name", lang)} placeholder="Aanya Shah" required />
           <div className="grid grid-cols-2 gap-4">
-            <Field name="product" label="Product" as="select">
+            <Field name="product" label={t("field_product", lang)} as="select">
               {products.map((p) => (
                 <option key={p.id}>{p.name}</option>
               ))}
             </Field>
-            <Field name="qty" label="Quantity" defaultValue="1" type="number" />
+            <Field name="qty" label={t("field_qty", lang)} defaultValue="1" type="number" />
           </div>
-          <Field name="city" label="City" placeholder="Ahmedabad" required />
-          <Field name="notes" label="Notes (optional)" as="textarea" placeholder="Anything we should know?" />
+          <Field name="city" label={t("field_city", lang)} placeholder="Ahmedabad" required />
+          <Field name="notes" label={t("field_notes", lang)} as="textarea" placeholder={t("field_notes_ph", lang)} />
           <button
             type="submit"
             className="w-full rounded-full bg-forest-deep text-cream font-medium py-4 hover:bg-forest transition mt-2"
           >
-            Send order on WhatsApp →
+            {t("submit_btn", lang)}
           </button>
         </form>
       </div>
@@ -519,6 +713,7 @@ function Field({
 
 /* ---------- FOOTER ---------- */
 function Footer() {
+  const { lang } = useLang();
   return (
     <footer className="bg-[oklch(0.20_0.04_152)] text-cream/70 py-14">
       <div className="container-x">
@@ -530,19 +725,19 @@ function Footer() {
             <div>
               <div className="font-display text-cream text-lg">Vedaas</div>
               <div className="text-[0.65rem] uppercase tracking-[0.22em] text-cream/45 mt-0.5">
-                Pure Green Nutrition
+                {t("footer_tagline", lang)}
               </div>
             </div>
           </div>
           <nav className="flex flex-wrap gap-6 text-sm">
-            <a href="#products" className="hover:text-ember transition">Products</a>
-            <a href="#ritual" className="hover:text-ember transition">Ritual</a>
-            <a href="#story" className="hover:text-ember transition">Story</a>
-            <a href="#order" className="hover:text-ember transition">Order</a>
+            <a href="#products" className="hover:text-ember transition">{t("nav_products", lang)}</a>
+            <a href="#ritual" className="hover:text-ember transition">{t("nav_ritual", lang)}</a>
+            <a href="#story" className="hover:text-ember transition">{t("nav_story", lang)}</a>
+            <a href="#order" className="hover:text-ember transition">{t("nav_order", lang)}</a>
           </nav>
         </div>
         <div className="mt-10 pt-6 border-t border-cream/10 text-xs text-cream/40 text-center">
-          © {new Date().getFullYear()} Vedaas Greens · Ahmedabad, India
+          © 2026 Vedaas Greens · {t("footer_copy_loc", lang)}
         </div>
       </div>
     </footer>
