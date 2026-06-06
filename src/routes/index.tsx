@@ -1,10 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import heroImg from "@/assets/hero-greens.jpg";
-import productGreens from "@/assets/product-greens.jpg";
-import productSea from "@/assets/product-seabuckthorn.jpg";
-import productAcidity from "@/assets/product-acidity.jpg";
 import ritualImg from "@/assets/ritual.jpg";
+import pGreenJuice from "@/assets/p-green-juice.jpg.asset.json";
+import pAcidity from "@/assets/p-acidity.jpg.asset.json";
+import pSeabuckthorn from "@/assets/p-seabuckthorn.jpg.asset.json";
+import pMoringaLeavesPowder from "@/assets/p-moringa-leaves-powder.jpg.asset.json";
+import pMoringaLeavesTablets from "@/assets/p-moringa-leaves-tablets.jpg.asset.json";
+import pMoringaPodsPowder from "@/assets/p-moringa-pods-powder.jpg.asset.json";
+import pMoringaPodsTablets from "@/assets/p-moringa-pods-tablets.jpg.asset.json";
+import pMalashuddhi from "@/assets/p-malashuddhi.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -12,37 +17,92 @@ export const Route = createFileRoute("/")({
 
 const products = [
   {
-    id: "greens",
-    name: "Vedaas Pure Greens",
-    tagline: "Daily green nutrition powder",
+    id: "green-juice",
+    name: "ગ્રીન જ્યુસ પાવડર",
+    tagline: "Green Juice Powder",
     description:
-      "A balanced blend of moringa, wheatgrass and spirulina. One scoop a day for natural energy, digestion and clarity.",
-    image: productGreens,
-    notes: ["Moringa", "Wheatgrass", "Spirulina"],
+      "Dehydrated green leaves powder — a blend of spinach, mint, neem, wheatgrass, tulsi, amla and moringa. One spoon daily for natural energy and detox.",
+    image: pGreenJuice.url,
+    notes: ["Spinach", "Wheatgrass", "Moringa", "Tulsi"],
     price: "₹ 699",
     size: "200 g",
   },
   {
-    id: "acidity",
-    name: "Acidity & Gas Relief",
-    tagline: "Ayurvedic comfort powder",
+    id: "acidity-gas",
+    name: "એસિડિટી ગેસ પાવડર",
+    tagline: "Acidity & Gas Relief Powder",
     description:
-      "Cooling fennel, mint and ginger powder formulated to settle acidity, bloating and gas — a teaspoon after meals.",
-    image: productAcidity,
-    notes: ["Fennel", "Mint", "Ginger"],
+      "An Ayurvedic blend of fennel, coriander, methi, ajwain, jeera and black pepper that soothes acidity, gas and bloating naturally.",
+    image: pAcidity.url,
+    notes: ["Fennel", "Coriander", "Ajwain", "Jeera"],
     price: "₹ 449",
-    size: "150 g",
+    size: "200 g",
   },
   {
     id: "seabuckthorn",
-    name: "Sea Buckthorn Juice",
-    tagline: "Immunity & skin tonic",
+    name: "VEDAAS सी-बकथॉर्न जूस",
+    tagline: "Seabuckthorn Juice",
     description:
-      "Cold-pressed Himalayan sea buckthorn — rich in omega-7, vitamin C and antioxidants for radiant skin and strong immunity.",
-    image: productSea,
-    notes: ["Omega-7", "Vitamin C", "Antioxidants"],
-    price: "₹ 899",
-    size: "500 ml",
+      "100% natural & herbal sea buckthorn juice — rich in Vitamin C & A, antioxidants and Omega 3, 6, 7, 9 for immunity and glowing skin.",
+    image: pSeabuckthorn.url,
+    notes: ["Omega 3,6,7,9", "Vitamin C", "Antioxidants"],
+    price: "₹ 395",
+    size: "100 ml",
+  },
+  {
+    id: "moringa-leaves-powder",
+    name: "સરગવાના પાન નો પાવડર",
+    tagline: "Moringa Leaves Powder",
+    description:
+      "Pure moringa leaves powder — rich in natural vitamins, minerals and antioxidants. Supports daily nutrition, immunity and overall wellness.",
+    image: pMoringaLeavesPowder.url,
+    notes: ["Vitamins", "Minerals", "Antioxidants"],
+    price: "₹ 250",
+    size: "200 g",
+  },
+  {
+    id: "moringa-leaves-tablets",
+    name: "💊 સરગવાના પાન ગોળી",
+    tagline: "Moringa Leaves Tablets",
+    description:
+      "Convenient tablet form of moringa leaf nutrition. Helps support immunity, stamina, metabolism and everyday health.",
+    image: pMoringaLeavesTablets.url,
+    notes: ["Immunity", "Stamina", "Metabolism"],
+    price: "₹ 250",
+    size: "180 Tablets",
+  },
+  {
+    id: "moringa-pods-powder",
+    name: "🌱 સરગવાના શિંગ નો પાવડર",
+    tagline: "Moringa Pods Powder",
+    description:
+      "Made from moringa pods. Provides natural plant nutrients that support digestion, vitality and balanced nutrition.",
+    image: pMoringaPodsPowder.url,
+    notes: ["Digestion", "Vitality", "Plant Nutrients"],
+    price: "₹ 250",
+    size: "200 g",
+  },
+  {
+    id: "moringa-pods-tablets",
+    name: "💊 સરગવા ની શિંગ ગોળી",
+    tagline: "Moringa Pods Tablets",
+    description:
+      "Easy-to-consume moringa pod tablets. Supports daily wellness, digestive health and nutritional balance.",
+    image: pMoringaPodsTablets.url,
+    notes: ["Wellness", "Digestion", "Balance"],
+    price: "₹ 250",
+    size: "180 Tablets",
+  },
+  {
+    id: "malashuddhi",
+    name: "🟤 મળશુદ્ધિ ટેબલેટ",
+    tagline: "Malashuddhi Tablets",
+    description:
+      "Traditionally used for digestive support and bowel regularity. Helps maintain digestive comfort and routine wellness.",
+    image: pMalashuddhi.url,
+    notes: ["Digestive", "Bowel Care", "Routine"],
+    price: "₹ 200",
+    size: "50 Tablets",
   },
 ];
 
@@ -125,7 +185,7 @@ function Hero() {
             </a>
           </div>
           <dl className="grid grid-cols-3 gap-6 pt-8 border-t border-border max-w-md">
-            <Stat k="3" v="Core products" />
+            <Stat k="8" v="Core products" />
             <Stat k="100%" v="Natural blend" />
             <Stat k="Free" v="Delivery" />
           </dl>
@@ -144,7 +204,7 @@ function Hero() {
               <div className="w-12 h-12 rounded-full bg-forest-deep grid place-items-center text-cream font-display">★</div>
               <div className="flex-1">
                 <div className="text-xs font-semibold text-moss uppercase tracking-wider">Featured</div>
-                <div className="font-display text-forest-deep font-semibold">Vedaas Pure Greens — 200 g</div>
+                <div className="font-display text-forest-deep font-semibold">ગ્રીન જ્યુસ પાવડર — 200 g</div>
               </div>
               <div className="font-display text-lg text-forest-deep font-semibold">₹ 699</div>
             </div>
@@ -199,7 +259,7 @@ function Products() {
         <div className="max-w-2xl mb-16">
           <div className="eyebrow mb-4">The Range</div>
           <h2 className="font-display text-4xl md:text-5xl text-forest-deep leading-tight">
-            Three rituals.<br />
+            Eight rituals.<br />
             <span className="italic text-moss font-normal">One simple promise.</span>
           </h2>
         </div>
