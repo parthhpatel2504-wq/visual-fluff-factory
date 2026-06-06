@@ -259,7 +259,7 @@ function Products() {
         <div className="max-w-2xl mb-16">
           <div className="eyebrow mb-4">The Range</div>
           <h2 className="font-display text-4xl md:text-5xl text-forest-deep leading-tight">
-            Three rituals.<br />
+            Eight rituals.<br />
             <span className="italic text-moss font-normal">One simple promise.</span>
           </h2>
         </div>
