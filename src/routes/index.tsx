@@ -274,6 +274,7 @@ function Index() {
     <LangCtx.Provider value={{ lang, setLang }}>
       <div className="min-h-screen bg-background text-foreground" lang={lang}>
         <Nav />
+        <PriceStrip />
         <Hero />
         <Promise />
         <Products />
@@ -286,6 +287,22 @@ function Index() {
     </LangCtx.Provider>
   );
 }
+
+function PriceStrip() {
+  const { lang } = useLang();
+  return (
+    <div className="bg-ember/15 border-b-2 border-ember/30">
+      <div className="container-x flex flex-wrap items-center justify-center gap-x-6 gap-y-1 py-2.5 text-center text-[0.95rem] font-semibold text-forest-deep">
+        <span>{t("price_strip_a", lang)} <span className="text-ember">₹ 200</span></span>
+        <span aria-hidden className="opacity-40">·</span>
+        <span>✓ {t("price_strip_b", lang)}</span>
+        <span aria-hidden className="opacity-40">·</span>
+        <span>✓ {t("price_strip_c", lang)}</span>
+      </div>
+    </div>
+  );
+}
+
 
 /* ---------- LANG TOGGLE ---------- */
 function LangToggle({ compact = false }: { compact?: boolean }) {
