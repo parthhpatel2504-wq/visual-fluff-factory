@@ -547,10 +547,11 @@ function Products() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="absolute -bottom-4 -right-4 rounded-2xl bg-cream px-5 py-3 shadow-soft border border-border">
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground">{p.size[lang]}</div>
-                  <div className="font-display text-xl text-forest-deep font-semibold">{p.price}</div>
+                <div className="absolute -bottom-5 -right-3 sm:-right-5 rounded-2xl bg-ember px-5 py-3 shadow-lift border-2 border-forest-deep/10">
+                  <div className="text-[0.75rem] font-bold uppercase tracking-wider text-forest-deep/80">{p.size[lang]}</div>
+                  <div className="font-display text-2xl text-forest-deep font-bold leading-none">{p.price}</div>
                 </div>
+
               </div>
 
               <div className="space-y-6">
