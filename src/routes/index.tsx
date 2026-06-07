@@ -105,7 +105,14 @@ const T: Record<string, Bi> = {
   submit_btn: { en: "Send order on WhatsApp →", gu: "WhatsApp પર ઓર્ડર મોકલો →" },
   footer_tagline: { en: "Pure Green Nutrition", gu: "શુદ્ધ આયુર્વેદિક પોષણ" },
   footer_copy_loc: { en: "Ahmedabad, India", gu: "અમદાવાદ, ભારત" },
+  reassure_nospam: { en: "We never spam. We only message about your order.", gu: "અમે ક્યારેય સ્પામ નહીં કરીએ. ફક્ત તમારા ઓર્ડર વિશે જ સંપર્ક કરીશું." },
+  reassure_free: { en: "Free delivery across India · Pay on delivery available", gu: "આખા ભારતમાં મફત ડિલિવરી · ડિલિવરી પર પેમેન્ટ ઉપલબ્ધ" },
+  reassure_call: { en: "Prefer to call? Dial", gu: "ફોન કરવો છે? ડાયલ કરો" },
+  price_strip_a: { en: "Starting at", gu: "શરૂઆત ફક્ત" },
+  price_strip_b: { en: "Free delivery", gu: "મફત ડિલિવરી" },
+  price_strip_c: { en: "Cash on delivery", gu: "ડિલિવરી પર પેમેન્ટ" },
 };
+
 
 const t = (k: keyof typeof T, lang: Lang) => T[k][lang];
 
@@ -267,6 +274,7 @@ function Index() {
     <LangCtx.Provider value={{ lang, setLang }}>
       <div className="min-h-screen bg-background text-foreground" lang={lang}>
         <Nav />
+        <PriceStrip />
         <Hero />
         <Promise />
         <Products />
@@ -279,6 +287,22 @@ function Index() {
     </LangCtx.Provider>
   );
 }
+
+function PriceStrip() {
+  const { lang } = useLang();
+  return (
+    <div className="bg-ember/15 border-b-2 border-ember/30">
+      <div className="container-x flex flex-wrap items-center justify-center gap-x-6 gap-y-1 py-2.5 text-center text-[0.95rem] font-semibold text-forest-deep">
+        <span>{t("price_strip_a", lang)} <span className="text-ember">₹ 200</span></span>
+        <span aria-hidden className="opacity-40">·</span>
+        <span>✓ {t("price_strip_b", lang)}</span>
+        <span aria-hidden className="opacity-40">·</span>
+        <span>✓ {t("price_strip_c", lang)}</span>
+      </div>
+    </div>
+  );
+}
+
 
 /* ---------- LANG TOGGLE ---------- */
 function LangToggle({ compact = false }: { compact?: boolean }) {
@@ -318,38 +342,79 @@ function LangToggle({ compact = false }: { compact?: boolean }) {
 /* ---------- NAV ---------- */
 function Nav() {
   const { lang } = useLang();
+  const [open, setOpen] = useState(false);
+  const links = [
+    { href: "#products", label: t("nav_products", lang) },
+    { href: "#ritual", label: t("nav_ritual", lang) },
+    { href: "#story", label: t("nav_story", lang) },
+    { href: "#order", label: t("nav_order", lang) },
+  ];
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 backdrop-blur-md bg-background/80">
+    <header className="sticky top-0 z-50 border-b-2 border-forest-deep/15 backdrop-blur-md bg-background/95">
       <div className="container-x flex items-center justify-between py-4 gap-3">
         <a href="#" className="flex items-center gap-3 shrink-0">
-          <div className="grid place-items-center w-10 h-10 rounded-full bg-forest-deep text-cream font-display font-bold">
+          <div className="grid place-items-center w-11 h-11 rounded-full bg-forest-deep text-cream font-display font-bold text-lg">
             V
           </div>
           <div className="leading-tight">
-            <div className="font-display font-semibold text-lg text-forest-deep">Vedaas</div>
-            <div className="eyebrow text-[0.6rem]">{t("footer_tagline", lang)}</div>
+            <div className="font-display font-bold text-xl text-forest-deep">Vedaas</div>
+            <div className="text-[0.8rem] font-medium text-forest">{t("footer_tagline", lang)}</div>
           </div>
         </a>
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/75">
-          <a href="#products" className="hover:text-forest-deep transition">{t("nav_products", lang)}</a>
-          <a href="#ritual" className="hover:text-forest-deep transition">{t("nav_ritual", lang)}</a>
-          <a href="#story" className="hover:text-forest-deep transition">{t("nav_story", lang)}</a>
-          <a href="#order" className="hover:text-forest-deep transition">{t("nav_order", lang)}</a>
+        <nav className="hidden md:flex items-center gap-7 text-base font-semibold text-forest-deep">
+          {links.map((l) => (
+            <a key={l.href} href={l.href} className="hover:text-ember transition">{l.label}</a>
+          ))}
         </nav>
         <div className="flex items-center gap-3">
           <LangToggle />
           <a
             href="#order"
-            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-forest-deep px-5 py-2.5 text-sm font-medium text-cream hover:bg-forest transition shadow-soft"
+            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-forest-deep px-5 py-3 text-base font-semibold text-cream hover:bg-forest transition shadow-soft"
           >
             {t("cta_order_now", lang)}
             <span aria-hidden>→</span>
           </a>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Menu"
+            aria-expanded={open}
+            className="md:hidden grid place-items-center w-12 h-12 rounded-full border-2 border-forest-deep/20 text-forest-deep"
+          >
+            <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              {open ? (<><path d="M6 6l12 12" /><path d="M18 6L6 18" /></>) : (<><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></>)}
+            </svg>
+          </button>
         </div>
       </div>
+      {open && (
+        <div className="md:hidden border-t-2 border-forest-deep/10 bg-background">
+          <nav className="container-x flex flex-col py-3">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="py-3 text-lg font-semibold text-forest-deep border-b border-border last:border-0"
+              >
+                {l.label}
+              </a>
+            ))}
+            <a
+              href="#order"
+              onClick={() => setOpen(false)}
+              className="mt-3 inline-flex justify-center items-center gap-2 rounded-full bg-forest-deep px-5 py-3.5 text-base font-semibold text-cream"
+            >
+              {t("cta_order_now", lang)} <span aria-hidden>→</span>
+            </a>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
+
 
 /* ---------- HERO ---------- */
 function Hero() {
@@ -482,10 +547,11 @@ function Products() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="absolute -bottom-4 -right-4 rounded-2xl bg-cream px-5 py-3 shadow-soft border border-border">
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground">{p.size[lang]}</div>
-                  <div className="font-display text-xl text-forest-deep font-semibold">{p.price}</div>
+                <div className="absolute -bottom-5 -right-3 sm:-right-5 rounded-2xl bg-ember px-5 py-3 shadow-lift border-2 border-forest-deep/10">
+                  <div className="text-[0.75rem] font-bold uppercase tracking-wider text-forest-deep/80">{p.size[lang]}</div>
+                  <div className="font-display text-2xl text-forest-deep font-bold leading-none">{p.price}</div>
                 </div>
+
               </div>
 
               <div className="space-y-6">
@@ -661,10 +727,19 @@ function Order() {
           <Field name="notes" label={t("field_notes", lang)} as="textarea" placeholder={t("field_notes_ph", lang)} />
           <button
             type="submit"
-            className="w-full rounded-full bg-forest-deep text-cream font-medium py-4 hover:bg-forest transition mt-2"
+            className="w-full rounded-full bg-forest-deep text-cream text-lg font-semibold py-5 hover:bg-forest transition mt-2"
           >
             {t("submit_btn", lang)}
           </button>
+          <div className="space-y-2 pt-1 text-center">
+            <p className="text-sm text-forest-deep/80 font-medium">🔒 {t("reassure_nospam", lang)}</p>
+            <p className="text-sm text-forest-deep/80 font-medium">🚚 {t("reassure_free", lang)}</p>
+            <p className="text-base text-forest-deep font-semibold">
+              📞 {t("reassure_call", lang)}{" "}
+              <a href="tel:+919800000000" className="underline decoration-ember decoration-2 underline-offset-4">+91 98000 00000</a>
+            </p>
+          </div>
+
         </form>
       </div>
     </section>
@@ -752,9 +827,10 @@ function WhatsAppFloat() {
       target="_blank"
       rel="noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-[#25d366] text-white grid place-items-center shadow-lift hover:scale-105 transition"
+      className="fixed bottom-5 right-5 z-50 w-[72px] h-[72px] rounded-full bg-[#25d366] text-white grid place-items-center shadow-lift hover:scale-105 transition ring-4 ring-white/70"
     >
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-9 h-9">
+
         <path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z" />
       </svg>
     </a>
