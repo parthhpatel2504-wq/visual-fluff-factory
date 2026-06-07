@@ -727,10 +727,19 @@ function Order() {
           <Field name="notes" label={t("field_notes", lang)} as="textarea" placeholder={t("field_notes_ph", lang)} />
           <button
             type="submit"
-            className="w-full rounded-full bg-forest-deep text-cream font-medium py-4 hover:bg-forest transition mt-2"
+            className="w-full rounded-full bg-forest-deep text-cream text-lg font-semibold py-5 hover:bg-forest transition mt-2"
           >
             {t("submit_btn", lang)}
           </button>
+          <div className="space-y-2 pt-1 text-center">
+            <p className="text-sm text-forest-deep/80 font-medium">🔒 {t("reassure_nospam", lang)}</p>
+            <p className="text-sm text-forest-deep/80 font-medium">🚚 {t("reassure_free", lang)}</p>
+            <p className="text-base text-forest-deep font-semibold">
+              📞 {t("reassure_call", lang)}{" "}
+              <a href="tel:+919800000000" className="underline decoration-ember decoration-2 underline-offset-4">+91 98000 00000</a>
+            </p>
+          </div>
+
         </form>
       </div>
     </section>
