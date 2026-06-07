@@ -105,7 +105,14 @@ const T: Record<string, Bi> = {
   submit_btn: { en: "Send order on WhatsApp →", gu: "WhatsApp પર ઓર્ડર મોકલો →" },
   footer_tagline: { en: "Pure Green Nutrition", gu: "શુદ્ધ આયુર્વેદિક પોષણ" },
   footer_copy_loc: { en: "Ahmedabad, India", gu: "અમદાવાદ, ભારત" },
+  reassure_nospam: { en: "We never spam. We only message about your order.", gu: "અમે ક્યારેય સ્પામ નહીં કરીએ. ફક્ત તમારા ઓર્ડર વિશે જ સંપર્ક કરીશું." },
+  reassure_free: { en: "Free delivery across India · Pay on delivery available", gu: "આખા ભારતમાં મફત ડિલિવરી · ડિલિવરી પર પેમેન્ટ ઉપલબ્ધ" },
+  reassure_call: { en: "Prefer to call? Dial", gu: "ફોન કરવો છે? ડાયલ કરો" },
+  price_strip_a: { en: "Starting at", gu: "શરૂઆત ફક્ત" },
+  price_strip_b: { en: "Free delivery", gu: "મફત ડિલિવરી" },
+  price_strip_c: { en: "Cash on delivery", gu: "ડિલિવરી પર પેમેન્ટ" },
 };
+
 
 const t = (k: keyof typeof T, lang: Lang) => T[k][lang];
 
