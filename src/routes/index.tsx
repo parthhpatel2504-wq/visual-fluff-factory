@@ -262,7 +262,7 @@ const products: ProductBi[] = [
 ];
 
 function Index() {
-  const [lang, setLang] = useState<Lang>("en");
+  const [lang, setLang] = useState<Lang>("gu");
   return (
     <LangCtx.Provider value={{ lang, setLang }}>
       <div className="min-h-screen bg-background text-foreground" lang={lang}>
