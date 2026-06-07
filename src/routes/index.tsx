@@ -122,6 +122,7 @@ type ProductBi = {
   name: string;
   tagline: Bi;
   description: Bi;
+  howto: Bi;
   image: string;
   notes: Bi[];
   price: string;
