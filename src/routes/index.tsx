@@ -318,38 +318,79 @@ function LangToggle({ compact = false }: { compact?: boolean }) {
 /* ---------- NAV ---------- */
 function Nav() {
   const { lang } = useLang();
+  const [open, setOpen] = useState(false);
+  const links = [
+    { href: "#products", label: t("nav_products", lang) },
+    { href: "#ritual", label: t("nav_ritual", lang) },
+    { href: "#story", label: t("nav_story", lang) },
+    { href: "#order", label: t("nav_order", lang) },
+  ];
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 backdrop-blur-md bg-background/80">
+    <header className="sticky top-0 z-50 border-b-2 border-forest-deep/15 backdrop-blur-md bg-background/95">
       <div className="container-x flex items-center justify-between py-4 gap-3">
         <a href="#" className="flex items-center gap-3 shrink-0">
-          <div className="grid place-items-center w-10 h-10 rounded-full bg-forest-deep text-cream font-display font-bold">
+          <div className="grid place-items-center w-11 h-11 rounded-full bg-forest-deep text-cream font-display font-bold text-lg">
             V
           </div>
           <div className="leading-tight">
-            <div className="font-display font-semibold text-lg text-forest-deep">Vedaas</div>
-            <div className="eyebrow text-[0.6rem]">{t("footer_tagline", lang)}</div>
+            <div className="font-display font-bold text-xl text-forest-deep">Vedaas</div>
+            <div className="text-[0.8rem] font-medium text-forest">{t("footer_tagline", lang)}</div>
           </div>
         </a>
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/75">
-          <a href="#products" className="hover:text-forest-deep transition">{t("nav_products", lang)}</a>
-          <a href="#ritual" className="hover:text-forest-deep transition">{t("nav_ritual", lang)}</a>
-          <a href="#story" className="hover:text-forest-deep transition">{t("nav_story", lang)}</a>
-          <a href="#order" className="hover:text-forest-deep transition">{t("nav_order", lang)}</a>
+        <nav className="hidden md:flex items-center gap-7 text-base font-semibold text-forest-deep">
+          {links.map((l) => (
+            <a key={l.href} href={l.href} className="hover:text-ember transition">{l.label}</a>
+          ))}
         </nav>
         <div className="flex items-center gap-3">
           <LangToggle />
           <a
             href="#order"
-            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-forest-deep px-5 py-2.5 text-sm font-medium text-cream hover:bg-forest transition shadow-soft"
+            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-forest-deep px-5 py-3 text-base font-semibold text-cream hover:bg-forest transition shadow-soft"
           >
             {t("cta_order_now", lang)}
             <span aria-hidden>→</span>
           </a>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Menu"
+            aria-expanded={open}
+            className="md:hidden grid place-items-center w-12 h-12 rounded-full border-2 border-forest-deep/20 text-forest-deep"
+          >
+            <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              {open ? (<><path d="M6 6l12 12" /><path d="M18 6L6 18" /></>) : (<><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></>)}
+            </svg>
+          </button>
         </div>
       </div>
+      {open && (
+        <div className="md:hidden border-t-2 border-forest-deep/10 bg-background">
+          <nav className="container-x flex flex-col py-3">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="py-3 text-lg font-semibold text-forest-deep border-b border-border last:border-0"
+              >
+                {l.label}
+              </a>
+            ))}
+            <a
+              href="#order"
+              onClick={() => setOpen(false)}
+              className="mt-3 inline-flex justify-center items-center gap-2 rounded-full bg-forest-deep px-5 py-3.5 text-base font-semibold text-cream"
+            >
+              {t("cta_order_now", lang)} <span aria-hidden>→</span>
+            </a>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
+
 
 /* ---------- HERO ---------- */
 function Hero() {
