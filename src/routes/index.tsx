@@ -592,6 +592,14 @@ function Products() {
                 <div className="eyebrow">{`0${i + 1} · ${p.tagline[lang]}`}</div>
                 <h3 className="font-display text-3xl md:text-4xl text-forest-deep">{p.name}</h3>
                 <p className="text-muted-foreground text-lg leading-relaxed">{p.description[lang]}</p>
+
+                <div className="rounded-xl border-2 border-sage/30 bg-sage/10 p-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-lg">📋</span>
+                    <span className="font-display text-lg font-semibold text-forest-deep">{t("how_to_use", lang)}</span>
+                  </div>
+                  <p className="text-forest-deep text-[1.05rem] leading-relaxed">{p.howto[lang]}</p>
+                </div>
                 <div className="flex flex-wrap gap-2 pt-2">
                   {p.notes.map((n) => (
                     <span
