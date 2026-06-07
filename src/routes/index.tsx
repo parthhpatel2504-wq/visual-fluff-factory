@@ -111,6 +111,7 @@ const T: Record<string, Bi> = {
   price_strip_a: { en: "Starting at", gu: "શરૂઆત ફક્ત" },
   price_strip_b: { en: "Free delivery", gu: "મફત ડિલિવરી" },
   price_strip_c: { en: "Cash on delivery", gu: "ડિલિવરી પર પેમેન્ટ" },
+  how_to_use: { en: "How to use", gu: "વાપરવાની રીત" },
 };
 
 
