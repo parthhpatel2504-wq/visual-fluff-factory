@@ -111,6 +111,7 @@ const T: Record<string, Bi> = {
   price_strip_a: { en: "Starting at", gu: "શરૂઆત ફક્ત" },
   price_strip_b: { en: "Free delivery", gu: "મફત ડિલિવરી" },
   price_strip_c: { en: "Cash on delivery", gu: "ડિલિવરી પર પેમેન્ટ" },
+  how_to_use: { en: "How to use", gu: "વાપરવાની રીત" },
 };
 
 
@@ -121,6 +122,7 @@ type ProductBi = {
   name: string;
   tagline: Bi;
   description: Bi;
+  howto: Bi;
   image: string;
   notes: Bi[];
   price: string;
@@ -135,6 +137,10 @@ const products: ProductBi[] = [
     description: {
       en: "Dehydrated green leaves powder — a blend of spinach, mint, neem, wheatgrass, tulsi, amla and moringa. One spoon daily for natural energy and detox.",
       gu: "સુકવેલા લીલા પાનનો પાવડર — પાલક, ફુદીનો, લીમડો, ઘઉંના ઘાસ, તુલસી, આમળા અને સરગવાનું મિશ્રણ. દરરોજ એક ચમચી — કુદરતી ઊર્જા અને ડિટોક્સ માટે.",
+    },
+    howto: {
+      en: "Mix 1 teaspoon in a glass of cool water. Stir well and drink on an empty stomach every morning.",
+      gu: "એક ગ્લાસ ઠંડા પાણીમાં ૧ ચમચી ભેળવો. સારી રીતે હલાવીને દરરોજ સવારે ખાલી પેટ પીવો.",
     },
     image: pGreenJuice.url,
     notes: [
@@ -154,6 +160,10 @@ const products: ProductBi[] = [
       en: "An Ayurvedic blend of fennel, coriander, methi, ajwain, jeera and black pepper that soothes acidity, gas and bloating naturally.",
       gu: "વરિયાળી, ધાણા, મેથી, અજમો, જીરું અને કાળા મરીનું આયુર્વેદિક મિશ્રણ — એસિડિટી, ગેસ અને ભારેપણાને કુદરતી રીતે શાંત કરે.",
     },
+    howto: {
+      en: "Take 1 teaspoon with warm water after heavy meals, or whenever acidity or gas troubles you.",
+      gu: "ભારે ભોજન પછી કે એસિડિટી-ગેસ થાય ત્યારે ગરમ પાણી સાથે ૧ ચમચી લો.",
+    },
     image: pAcidity.url,
     notes: [
       { en: "Fennel", gu: "વરિયાળી" },
@@ -172,6 +182,10 @@ const products: ProductBi[] = [
       en: "100% natural & herbal sea buckthorn juice — rich in Vitamin C & A, antioxidants and Omega 3, 6, 7, 9 for immunity and glowing skin.",
       gu: "૧૦૦% કુદરતી અને હર્બલ સી-બકથૉર્ન જ્યુસ — વિટામિન C અને A, એન્ટિઓક્સિડન્ટ્સ અને ઓમેગા ૩,૬,૭,૯ થી ભરપૂર. રોગપ્રતિકારકતા અને ચમકતી ત્વચા માટે.",
     },
+    howto: {
+      en: "Mix 30 ml in a glass of water and drink before breakfast daily.",
+      gu: "એક ગ્લાસ પાણીમાં ૩૦ મિ.લી. ભેળવીને દરરોજ નાસ્તા પહેલાં પીવો.",
+    },
     image: pSeabuckthorn.url,
     notes: [
       { en: "Omega 3,6,7,9", gu: "ઓમેગા ૩,૬,૭,૯" },
@@ -188,6 +202,10 @@ const products: ProductBi[] = [
     description: {
       en: "Pure moringa leaves powder — rich in natural vitamins, minerals and antioxidants. Supports daily nutrition, immunity and overall wellness.",
       gu: "શુદ્ધ સરગવાના પાનનો પાવડર — કુદરતી વિટામિન, ખનિજ અને એન્ટિઓક્સિડન્ટ્સથી ભરપૂર. રોજિંદા પોષણ, રોગપ્રતિકારકતા અને સંપૂર્ણ આરોગ્ય માટે.",
+    },
+    howto: {
+      en: "Mix 1 teaspoon in warm water or buttermilk. Best taken in the morning.",
+      gu: "ગરમ પાણી કે છાશમાં ૧ ચમચી ભેળવો. સવારે લેવું શ્રેષ્ઠ.",
     },
     image: pMoringaLeavesPowder.url,
     notes: [
@@ -206,6 +224,10 @@ const products: ProductBi[] = [
       en: "Convenient tablet form of moringa leaf nutrition. Helps support immunity, stamina, metabolism and everyday health.",
       gu: "સરગવાના પાનનું પોષણ સરળ ગોળી રૂપે. રોગપ્રતિકારકતા, શક્તિ, ચયાપચય અને રોજિંદા આરોગ્ય માટે મદદરૂપ.",
     },
+    howto: {
+      en: "Take 2 tablets with water after meals, twice a day.",
+      gu: "ભોજન પછી પાણી સાથે ૨ ગોળી, દિવસમાં બે વાર લો.",
+    },
     image: pMoringaLeavesTablets.url,
     notes: [
       { en: "Immunity", gu: "રોગપ્રતિકારકતા" },
@@ -222,6 +244,10 @@ const products: ProductBi[] = [
     description: {
       en: "Made from moringa pods. Provides natural plant nutrients that support digestion, vitality and balanced nutrition.",
       gu: "સરગવાની શિંગમાંથી બનાવેલ. પાચન, સ્ફૂર્તિ અને સંતુલિત પોષણને ટેકો આપતા કુદરતી તત્વો.",
+    },
+    howto: {
+      en: "Mix 1 teaspoon in warm water or juice. Can be taken morning or evening.",
+      gu: "ગરમ પાણી કે જ્યુસમાં ૧ ચમચી ભેળવો. સવારે કે સાંજે લઈ શકાય.",
     },
     image: pMoringaPodsPowder.url,
     notes: [
@@ -240,6 +266,10 @@ const products: ProductBi[] = [
       en: "Easy-to-consume moringa pod tablets. Supports daily wellness, digestive health and nutritional balance.",
       gu: "સરળતાથી લઈ શકાય તેવી સરગવાની શિંગની ગોળી. રોજિંદા આરોગ્ય, પાચન અને પોષણના સંતુલન માટે.",
     },
+    howto: {
+      en: "Take 2 tablets with water after meals, morning and evening.",
+      gu: "ભોજન પછી પાણી સાથે ૨ ગોળી, સવારે અને સાંજે લો.",
+    },
     image: pMoringaPodsTablets.url,
     notes: [
       { en: "Wellness", gu: "આરોગ્ય" },
@@ -256,6 +286,10 @@ const products: ProductBi[] = [
     description: {
       en: "Traditionally used for digestive support and bowel regularity. Helps maintain digestive comfort and routine wellness.",
       gu: "પાચન અને કબજિયાતમાં રાહત માટે પારંપરિક રીતે ઉપયોગી. દૈનિક પાચન આરામ અને નિયમિતતા જાળવે.",
+    },
+    howto: {
+      en: "Take 1–2 tablets with warm water at bedtime for smooth morning routine.",
+      gu: "સૂતી વખતે ગરમ પાણી સાથે ૧–૨ ગોળી લો. સવારે આરામદાયક અનુભવ થાય.",
     },
     image: pMalashuddhi.url,
     notes: [
@@ -558,6 +592,14 @@ function Products() {
                 <div className="eyebrow">{`0${i + 1} · ${p.tagline[lang]}`}</div>
                 <h3 className="font-display text-3xl md:text-4xl text-forest-deep">{p.name}</h3>
                 <p className="text-muted-foreground text-lg leading-relaxed">{p.description[lang]}</p>
+
+                <div className="rounded-xl border-2 border-sage/30 bg-sage/10 p-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-lg">📋</span>
+                    <span className="font-display text-lg font-semibold text-forest-deep">{t("how_to_use", lang)}</span>
+                  </div>
+                  <p className="text-forest-deep text-[1.05rem] leading-relaxed">{p.howto[lang]}</p>
+                </div>
                 <div className="flex flex-wrap gap-2 pt-2">
                   {p.notes.map((n) => (
                     <span
