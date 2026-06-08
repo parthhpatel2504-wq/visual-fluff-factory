@@ -143,21 +143,28 @@ const products: ProductBi[] = [
     name: "ગ્રીન જ્યુસ પાવડર",
     tagline: { en: "Green Juice Powder", gu: "ગ્રીન જ્યુસ પાવડર" },
     description: {
-      en: "Dehydrated green leaves powder — a blend of spinach, mint, neem, wheatgrass, tulsi, amla and moringa. One spoon daily for natural energy and detox.",
-      gu: "સુકવેલા લીલા પાનનો પાવડર — પાલક, ફુદીનો, લીમડો, ઘઉંના ઘાસ, તુલસી, આમળા અને સરગવાનું મિશ્રણ. દરરોજ એક ચમચી — કુદરતી ઊર્જા અને ડિટોક્સ માટે.",
+      en: "A daily detox blend of coriander, mint, spinach, tulsi, curry leaves, wheatgrass, alfalfa, amla, moringa leaves and amchur — full of natural vitamins and minerals for a clean, healthy life.",
+      gu: "કોથમીર, ફુદીનો, પાલક, તુલસી, મીઠો લીમડો, ઘઉંના જવારા, આલ્ફા આલ્ફા, આમળા, સરગવાના પાન અને આમચૂરનું દૈનિક ડિટોક્સ મિશ્રણ — વિટામિન અને ખનિજથી ભરપૂર, શુદ્ધ અને તંદુરસ્ત જીવન માટે.",
     },
     howto: {
-      en: "Mix 1 teaspoon in a glass of cool water. Stir well and drink on an empty stomach every morning.",
-      gu: "એક ગ્લાસ ઠંડા પાણીમાં ૧ ચમચી ભેળવો. સારી રીતે હલાવીને દરરોજ સવારે ખાલી પેટ પીવો.",
+      en: "1 spoon Green Juice Powder in 1 glass of normal water — every morning on an empty stomach.",
+      gu: "૧ ગ્લાસ સામાન્ય પાણીમાં ૧ ચમચી ગ્રીન જ્યુસ પાવડર — દરરોજ સવારે ખાલી પેટ.",
     },
     image: pGreenJuice.url,
     notes: [
+      { en: "Coriander", gu: "કોથમીર" },
+      { en: "Mint", gu: "ફુદીનો" },
       { en: "Spinach", gu: "પાલક" },
-      { en: "Wheatgrass", gu: "ઘઉંના ઘાસ" },
-      { en: "Moringa", gu: "સરગવો" },
       { en: "Tulsi", gu: "તુલસી" },
+      { en: "Curry Leaves", gu: "મીઠો લીમડો" },
+      { en: "Wheatgrass", gu: "ઘઉંના જવારા" },
+      { en: "Alfalfa", gu: "આલ્ફા આલ્ફા" },
+      { en: "Amla", gu: "આમળા" },
+      { en: "Moringa Leaves", gu: "સરગવાના પાન" },
+      { en: "Amchur", gu: "આમચૂર" },
     ],
-    price: "₹ 699",
+    price: "₹ 350",
+    mrp: "₹ 499",
     size: { en: "200 g", gu: "૨૦૦ ગ્રામ" },
   },
   {
@@ -165,12 +172,12 @@ const products: ProductBi[] = [
     name: "એસિડિટી ગેસ પાવડર",
     tagline: { en: "Acidity & Gas Relief Powder", gu: "એસિડિટી અને ગેસ રાહત પાવડર" },
     description: {
-      en: "An Ayurvedic blend of fennel, coriander, methi, ajwain, jeera and black pepper that soothes acidity, gas and bloating naturally.",
-      gu: "વરિયાળી, ધાણા, મેથી, અજમો, જીરું અને કાળા મરીનું આયુર્વેદિક મિશ્રણ — એસિડિટી, ગેસ અને ભારેપણાને કુદરતી રીતે શાંત કરે.",
+      en: "An Ayurvedic blend that soothes acidity, gas and bloating naturally — gentle on the stomach, effective within minutes.",
+      gu: "એસિડિટી, ગેસ અને ભારેપણાને કુદરતી રીતે શાંત કરતું આયુર્વેદિક મિશ્રણ — પેટ માટે હળવું, થોડી જ મિનિટોમાં અસરકારક.",
     },
     howto: {
-      en: "Take 1 teaspoon with warm water after heavy meals, or whenever acidity or gas troubles you.",
-      gu: "ભારે ભોજન પછી કે એસિડિટી-ગેસ થાય ત્યારે ગરમ પાણી સાથે ૧ ચમચી લો.",
+      en: "1 spoon half an hour after a meal — OR soak 1 spoon in a glass of water overnight and drink it in the morning.",
+      gu: "ભોજનના અડધા કલાક પછી ૧ ચમચી — અથવા ૧ ચમચી રાત્રે એક ગ્લાસ પાણીમાં પલાળી રાખીને સવારે પીવો.",
     },
     image: pAcidity.url,
     notes: [
@@ -179,7 +186,8 @@ const products: ProductBi[] = [
       { en: "Ajwain", gu: "અજમો" },
       { en: "Jeera", gu: "જીરું" },
     ],
-    price: "₹ 449",
+    price: "₹ 400",
+    mrp: "₹ 599",
     size: { en: "200 g", gu: "૨૦૦ ગ્રામ" },
   },
   {
@@ -191,8 +199,8 @@ const products: ProductBi[] = [
       gu: "૧૦૦% કુદરતી અને હર્બલ સી-બકથૉર્ન જ્યુસ — વિટામિન C અને A, એન્ટિઓક્સિડન્ટ્સ અને ઓમેગા ૩,૬,૭,૯ થી ભરપૂર. રોગપ્રતિકારકતા અને ચમકતી ત્વચા માટે.",
     },
     howto: {
-      en: "Mix 30 ml in a glass of water and drink before breakfast daily.",
-      gu: "એક ગ્લાસ પાણીમાં ૩૦ મિ.લી. ભેળવીને દરરોજ નાસ્તા પહેલાં પીવો.",
+      en: "10 ml or 20 ml in 1 glass of water, once daily.",
+      gu: "૧ ગ્લાસ પાણીમાં ૧૦ મિ.લી. અથવા ૨૦ મિ.લી. — દિવસમાં એક વાર.",
     },
     image: pSeabuckthorn.url,
     notes: [
