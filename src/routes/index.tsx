@@ -758,11 +758,19 @@ function Order() {
           </h2>
           <p className="text-cream/75 text-lg max-w-md leading-relaxed">{t("order_p", lang)}</p>
           <div className="space-y-4 pt-4">
-            <Meta label={t("meta_whatsapp", lang)} value="+91 98xxxxxx00" />
+            <Meta label={t("meta_whatsapp", lang)} value="+91 79906 98497" />
             <Meta label={t("meta_email", lang)} value="orders@vedaas.in" />
             <Meta label={t("meta_shipping_l", lang)} value={t("meta_shipping_v", lang)} />
             <Meta label={t("meta_hours_l", lang)} value={t("meta_hours_v", lang)} />
           </div>
+          <a
+            href="https://www.google.com/search?q=Vedaas+Greens+Ahmedabad"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-ember underline decoration-ember/60 decoration-2 underline-offset-4 hover:text-ember/80 transition"
+          >
+            ★★★★★ {t("reviews_link", lang)} →
+          </a>
         </div>
 
         <form
@@ -772,15 +780,18 @@ function Order() {
             const msg =
               `Hi Vedaas! I'd like to order:%0A%0A` +
               `Name: ${f.get("name")}%0A` +
+              `Phone: ${f.get("phone")}%0A` +
               `Product: ${f.get("product")}%0A` +
               `Qty: ${f.get("qty")}%0A` +
-              `City: ${f.get("city")}%0A%0A` +
+              `City: ${f.get("city")}%0A` +
+              `Address: ${f.get("address")}%0A%0A` +
               `Notes: ${f.get("notes") || "—"}`;
-            window.open(`https://wa.me/919800000000?text=${msg}`, "_blank");
+            window.open(`https://wa.me/917990698497?text=${msg}`, "_blank");
           }}
           className="rounded-3xl bg-cream text-foreground p-7 lg:p-9 shadow-lift space-y-4"
         >
           <Field name="name" label={t("field_name", lang)} placeholder="Aanya Shah" required />
+          <Field name="phone" label={t("field_phone", lang)} type="tel" placeholder="+91 ..." required />
           <div className="grid grid-cols-2 gap-4">
             <Field name="product" label={t("field_product", lang)} as="select">
               {products.map((p) => (
@@ -790,6 +801,7 @@ function Order() {
             <Field name="qty" label={t("field_qty", lang)} defaultValue="1" type="number" />
           </div>
           <Field name="city" label={t("field_city", lang)} placeholder="Ahmedabad" required />
+          <Field name="address" label={t("field_address", lang)} as="textarea" placeholder={t("field_address_ph", lang)} required />
           <Field name="notes" label={t("field_notes", lang)} as="textarea" placeholder={t("field_notes_ph", lang)} />
           <button
             type="submit"
@@ -802,9 +814,10 @@ function Order() {
             <p className="text-sm text-forest-deep/80 font-medium">🚚 {t("reassure_free", lang)}</p>
             <p className="text-base text-forest-deep font-semibold">
               📞 {t("reassure_call", lang)}{" "}
-              <a href="tel:+919800000000" className="underline decoration-ember decoration-2 underline-offset-4">+91 98000 00000</a>
+              <a href="tel:+917990698497" className="underline decoration-ember decoration-2 underline-offset-4">+91 79906 98497</a>
             </p>
           </div>
+
 
         </form>
       </div>
