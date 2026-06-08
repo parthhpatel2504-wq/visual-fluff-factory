@@ -133,6 +133,7 @@ type ProductBi = {
   image: string;
   notes: Bi[];
   price: string;
+  mrp?: string;
   size: Bi;
 };
 
