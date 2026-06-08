@@ -100,6 +100,9 @@ const T: Record<string, Bi> = {
   field_product: { en: "Product", gu: "ઉત્પાદન" },
   field_qty: { en: "Quantity", gu: "જથ્થો" },
   field_city: { en: "City", gu: "શહેર" },
+  field_address: { en: "Full delivery address", gu: "સંપૂર્ણ સરનામું" },
+  field_address_ph: { en: "House / Flat, street, area, city, pincode", gu: "ઘર / ફ્લેટ, શેરી, વિસ્તાર, શહેર, પીનકોડ" },
+  field_phone: { en: "Phone number", gu: "ફોન નંબર" },
   field_notes: { en: "Notes (optional)", gu: "નોંધ (વૈકલ્પિક)" },
   field_notes_ph: { en: "Anything we should know?", gu: "કંઈ ખાસ જણાવવું છે?" },
   submit_btn: { en: "Send order on WhatsApp →", gu: "WhatsApp પર ઓર્ડર મોકલો →" },
@@ -112,6 +115,10 @@ const T: Record<string, Bi> = {
   price_strip_b: { en: "Free delivery", gu: "મફત ડિલિવરી" },
   price_strip_c: { en: "Cash on delivery", gu: "ડિલિવરી પર પેમેન્ટ" },
   how_to_use: { en: "How to use", gu: "વાપરવાની રીત" },
+  mrp_label: { en: "MRP", gu: "MRP" },
+  special_label: { en: "Special price", gu: "ખાસ ભાવ" },
+  reviews_link: { en: "Read our Google reviews", gu: "અમારા Google રિવ્યૂ વાંચો" },
+  fssai_label: { en: "FSSAI Lic. No.", gu: "FSSAI લાઇસન્સ નં." },
 };
 
 
@@ -126,6 +133,7 @@ type ProductBi = {
   image: string;
   notes: Bi[];
   price: string;
+  mrp?: string;
   size: Bi;
 };
 
@@ -135,21 +143,28 @@ const products: ProductBi[] = [
     name: "ગ્રીન જ્યુસ પાવડર",
     tagline: { en: "Green Juice Powder", gu: "ગ્રીન જ્યુસ પાવડર" },
     description: {
-      en: "Dehydrated green leaves powder — a blend of spinach, mint, neem, wheatgrass, tulsi, amla and moringa. One spoon daily for natural energy and detox.",
-      gu: "સુકવેલા લીલા પાનનો પાવડર — પાલક, ફુદીનો, લીમડો, ઘઉંના ઘાસ, તુલસી, આમળા અને સરગવાનું મિશ્રણ. દરરોજ એક ચમચી — કુદરતી ઊર્જા અને ડિટોક્સ માટે.",
+      en: "A daily detox blend of coriander, mint, spinach, tulsi, curry leaves, wheatgrass, alfalfa, amla, moringa leaves and amchur — full of natural vitamins and minerals for a clean, healthy life.",
+      gu: "કોથમીર, ફુદીનો, પાલક, તુલસી, મીઠો લીમડો, ઘઉંના જવારા, આલ્ફા આલ્ફા, આમળા, સરગવાના પાન અને આમચૂરનું દૈનિક ડિટોક્સ મિશ્રણ — વિટામિન અને ખનિજથી ભરપૂર, શુદ્ધ અને તંદુરસ્ત જીવન માટે.",
     },
     howto: {
-      en: "Mix 1 teaspoon in a glass of cool water. Stir well and drink on an empty stomach every morning.",
-      gu: "એક ગ્લાસ ઠંડા પાણીમાં ૧ ચમચી ભેળવો. સારી રીતે હલાવીને દરરોજ સવારે ખાલી પેટ પીવો.",
+      en: "1 spoon Green Juice Powder in 1 glass of normal water — every morning on an empty stomach.",
+      gu: "૧ ગ્લાસ સામાન્ય પાણીમાં ૧ ચમચી ગ્રીન જ્યુસ પાવડર — દરરોજ સવારે ખાલી પેટ.",
     },
     image: pGreenJuice.url,
     notes: [
+      { en: "Coriander", gu: "કોથમીર" },
+      { en: "Mint", gu: "ફુદીનો" },
       { en: "Spinach", gu: "પાલક" },
-      { en: "Wheatgrass", gu: "ઘઉંના ઘાસ" },
-      { en: "Moringa", gu: "સરગવો" },
       { en: "Tulsi", gu: "તુલસી" },
+      { en: "Curry Leaves", gu: "મીઠો લીમડો" },
+      { en: "Wheatgrass", gu: "ઘઉંના જવારા" },
+      { en: "Alfalfa", gu: "આલ્ફા આલ્ફા" },
+      { en: "Amla", gu: "આમળા" },
+      { en: "Moringa Leaves", gu: "સરગવાના પાન" },
+      { en: "Amchur", gu: "આમચૂર" },
     ],
-    price: "₹ 699",
+    price: "₹ 350",
+    mrp: "₹ 499",
     size: { en: "200 g", gu: "૨૦૦ ગ્રામ" },
   },
   {
@@ -157,12 +172,12 @@ const products: ProductBi[] = [
     name: "એસિડિટી ગેસ પાવડર",
     tagline: { en: "Acidity & Gas Relief Powder", gu: "એસિડિટી અને ગેસ રાહત પાવડર" },
     description: {
-      en: "An Ayurvedic blend of fennel, coriander, methi, ajwain, jeera and black pepper that soothes acidity, gas and bloating naturally.",
-      gu: "વરિયાળી, ધાણા, મેથી, અજમો, જીરું અને કાળા મરીનું આયુર્વેદિક મિશ્રણ — એસિડિટી, ગેસ અને ભારેપણાને કુદરતી રીતે શાંત કરે.",
+      en: "An Ayurvedic blend that soothes acidity, gas and bloating naturally — gentle on the stomach, effective within minutes.",
+      gu: "એસિડિટી, ગેસ અને ભારેપણાને કુદરતી રીતે શાંત કરતું આયુર્વેદિક મિશ્રણ — પેટ માટે હળવું, થોડી જ મિનિટોમાં અસરકારક.",
     },
     howto: {
-      en: "Take 1 teaspoon with warm water after heavy meals, or whenever acidity or gas troubles you.",
-      gu: "ભારે ભોજન પછી કે એસિડિટી-ગેસ થાય ત્યારે ગરમ પાણી સાથે ૧ ચમચી લો.",
+      en: "1 spoon half an hour after a meal — OR soak 1 spoon in a glass of water overnight and drink it in the morning.",
+      gu: "ભોજનના અડધા કલાક પછી ૧ ચમચી — અથવા ૧ ચમચી રાત્રે એક ગ્લાસ પાણીમાં પલાળી રાખીને સવારે પીવો.",
     },
     image: pAcidity.url,
     notes: [
@@ -171,7 +186,8 @@ const products: ProductBi[] = [
       { en: "Ajwain", gu: "અજમો" },
       { en: "Jeera", gu: "જીરું" },
     ],
-    price: "₹ 449",
+    price: "₹ 400",
+    mrp: "₹ 599",
     size: { en: "200 g", gu: "૨૦૦ ગ્રામ" },
   },
   {
@@ -183,8 +199,8 @@ const products: ProductBi[] = [
       gu: "૧૦૦% કુદરતી અને હર્બલ સી-બકથૉર્ન જ્યુસ — વિટામિન C અને A, એન્ટિઓક્સિડન્ટ્સ અને ઓમેગા ૩,૬,૭,૯ થી ભરપૂર. રોગપ્રતિકારકતા અને ચમકતી ત્વચા માટે.",
     },
     howto: {
-      en: "Mix 30 ml in a glass of water and drink before breakfast daily.",
-      gu: "એક ગ્લાસ પાણીમાં ૩૦ મિ.લી. ભેળવીને દરરોજ નાસ્તા પહેલાં પીવો.",
+      en: "10 ml or 20 ml in 1 glass of water, once daily.",
+      gu: "૧ ગ્લાસ પાણીમાં ૧૦ મિ.લી. અથવા ૨૦ મિ.લી. — દિવસમાં એક વાર.",
     },
     image: pSeabuckthorn.url,
     notes: [
@@ -288,8 +304,8 @@ const products: ProductBi[] = [
       gu: "પાચન અને કબજિયાતમાં રાહત માટે પારંપરિક રીતે ઉપયોગી. દૈનિક પાચન આરામ અને નિયમિતતા જાળવે.",
     },
     howto: {
-      en: "Take 1–2 tablets with warm water at bedtime for smooth morning routine.",
-      gu: "સૂતી વખતે ગરમ પાણી સાથે ૧–૨ ગોળી લો. સવારે આરામદાયક અનુભવ થાય.",
+      en: "Take 1 tablet at night, twice a week only.",
+      gu: "રાત્રે ફક્ત ૧ ગોળી — અઠવાડિયામાં બે વાર.",
     },
     image: pMalashuddhi.url,
     notes: [
@@ -502,7 +518,7 @@ function Hero() {
                   ગ્રીન જ્યુસ પાવડર — {products[0].size[lang]}
                 </div>
               </div>
-              <div className="font-display text-lg text-forest-deep font-semibold">₹ 699</div>
+              <div className="font-display text-lg text-forest-deep font-semibold">₹ 350</div>
             </div>
           </div>
           <div className="absolute -top-4 -right-4 hidden lg:block w-28 h-28 rounded-full bg-ember/15 -z-10" />
@@ -583,7 +599,15 @@ function Products() {
                 </div>
                 <div className="absolute -bottom-5 -right-3 sm:-right-5 rounded-2xl bg-ember px-5 py-3 shadow-lift border-2 border-forest-deep/10">
                   <div className="text-[0.75rem] font-bold uppercase tracking-wider text-forest-deep/80">{p.size[lang]}</div>
-                  <div className="font-display text-2xl text-forest-deep font-bold leading-none">{p.price}</div>
+                  <div className="flex items-baseline gap-2 leading-none">
+                    <div className="font-display text-2xl text-forest-deep font-bold">{p.price}</div>
+                    {p.mrp && (
+                      <div className="text-sm font-semibold text-forest-deep/55 line-through">{p.mrp}</div>
+                    )}
+                  </div>
+                  {p.mrp && (
+                    <div className="text-[0.7rem] font-bold uppercase tracking-wider text-forest mt-0.5">{t("special_label", lang)}</div>
+                  )}
                 </div>
 
               </div>
@@ -700,12 +724,15 @@ function Story() {
             <span className="italic text-moss font-normal">{t("story_h2_b", lang)}</span>
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">{t("story_p", lang)}</p>
-          <div className="pt-4 flex justify-center gap-3 text-xs uppercase tracking-wider text-muted-foreground">
+          <div className="pt-4 flex flex-wrap justify-center gap-x-3 gap-y-2 text-xs uppercase tracking-wider text-muted-foreground">
             <span>{t("badge_fssai", lang)}</span>
             <span aria-hidden>·</span>
             <span>{t("badge_made", lang)}</span>
             <span aria-hidden>·</span>
             <span>{t("badge_vegan", lang)}</span>
+          </div>
+          <div className="text-sm font-semibold text-forest-deep">
+            {t("fssai_label", lang)}: <span className="font-mono tracking-wide">20725038005253</span>
           </div>
         </div>
       </div>
@@ -734,11 +761,19 @@ function Order() {
           </h2>
           <p className="text-cream/75 text-lg max-w-md leading-relaxed">{t("order_p", lang)}</p>
           <div className="space-y-4 pt-4">
-            <Meta label={t("meta_whatsapp", lang)} value="+91 98xxxxxx00" />
+            <Meta label={t("meta_whatsapp", lang)} value="+91 79906 98497" />
             <Meta label={t("meta_email", lang)} value="orders@vedaas.in" />
             <Meta label={t("meta_shipping_l", lang)} value={t("meta_shipping_v", lang)} />
             <Meta label={t("meta_hours_l", lang)} value={t("meta_hours_v", lang)} />
           </div>
+          <a
+            href="https://www.google.com/search?q=Vedaas+Greens+Ahmedabad"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-ember underline decoration-ember/60 decoration-2 underline-offset-4 hover:text-ember/80 transition"
+          >
+            ★★★★★ {t("reviews_link", lang)} →
+          </a>
         </div>
 
         <form
@@ -748,15 +783,18 @@ function Order() {
             const msg =
               `Hi Vedaas! I'd like to order:%0A%0A` +
               `Name: ${f.get("name")}%0A` +
+              `Phone: ${f.get("phone")}%0A` +
               `Product: ${f.get("product")}%0A` +
               `Qty: ${f.get("qty")}%0A` +
-              `City: ${f.get("city")}%0A%0A` +
+              `City: ${f.get("city")}%0A` +
+              `Address: ${f.get("address")}%0A%0A` +
               `Notes: ${f.get("notes") || "—"}`;
-            window.open(`https://wa.me/919800000000?text=${msg}`, "_blank");
+            window.open(`https://wa.me/917990698497?text=${msg}`, "_blank");
           }}
           className="rounded-3xl bg-cream text-foreground p-7 lg:p-9 shadow-lift space-y-4"
         >
           <Field name="name" label={t("field_name", lang)} placeholder="Aanya Shah" required />
+          <Field name="phone" label={t("field_phone", lang)} type="tel" placeholder="+91 ..." required />
           <div className="grid grid-cols-2 gap-4">
             <Field name="product" label={t("field_product", lang)} as="select">
               {products.map((p) => (
@@ -766,6 +804,7 @@ function Order() {
             <Field name="qty" label={t("field_qty", lang)} defaultValue="1" type="number" />
           </div>
           <Field name="city" label={t("field_city", lang)} placeholder="Ahmedabad" required />
+          <Field name="address" label={t("field_address", lang)} as="textarea" placeholder={t("field_address_ph", lang)} required />
           <Field name="notes" label={t("field_notes", lang)} as="textarea" placeholder={t("field_notes_ph", lang)} />
           <button
             type="submit"
@@ -778,9 +817,10 @@ function Order() {
             <p className="text-sm text-forest-deep/80 font-medium">🚚 {t("reassure_free", lang)}</p>
             <p className="text-base text-forest-deep font-semibold">
               📞 {t("reassure_call", lang)}{" "}
-              <a href="tel:+919800000000" className="underline decoration-ember decoration-2 underline-offset-4">+91 98000 00000</a>
+              <a href="tel:+917990698497" className="underline decoration-ember decoration-2 underline-offset-4">+91 79906 98497</a>
             </p>
           </div>
+
 
         </form>
       </div>
@@ -854,7 +894,7 @@ function Footer() {
           </nav>
         </div>
         <div className="mt-10 pt-6 border-t border-cream/10 text-xs text-cream/40 text-center">
-          © 2026 Vedaas Greens · {t("footer_copy_loc", lang)}
+          © 2026 Vedaas Greens · {t("footer_copy_loc", lang)} · {t("fssai_label", lang)} 20725038005253
         </div>
       </div>
     </footer>
@@ -865,7 +905,7 @@ function Footer() {
 function WhatsAppFloat() {
   return (
     <a
-      href="https://wa.me/919800000000"
+      href="https://wa.me/917990698497"
       target="_blank"
       rel="noreferrer"
       aria-label="Chat on WhatsApp"
