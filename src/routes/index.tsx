@@ -156,7 +156,7 @@ const products: ProductBi[] = [
       en: "1 spoon Green Juice Powder in 1 glass of normal water — every morning on an empty stomach.",
       gu: "૧ ગ્લાસ સામાન્ય પાણીમાં ૧ ચમચી ગ્રીન જ્યુસ પાવડર — દરરોજ સવારે ખાલી પેટ.",
     },
-    image: pGreenJuice.url,
+    image: pGreenJuice,
     notes: [
       { en: "Coriander", gu: "કોથમીર" },
       { en: "Mint", gu: "ફુદીનો" },
@@ -185,7 +185,7 @@ const products: ProductBi[] = [
       en: "1 spoon half an hour after a meal — OR soak 1 spoon in a glass of water overnight and drink it in the morning.",
       gu: "ભોજનના અડધા કલાક પછી ૧ ચમચી — અથવા ૧ ચમચી રાત્રે એક ગ્લાસ પાણીમાં પલાળી રાખીને સવારે પીવો.",
     },
-    image: pAcidity.url,
+    image: pAcidity,
     notes: [
       { en: "Fennel", gu: "વરિયાળી" },
       { en: "Coriander", gu: "ધાણા" },
@@ -208,7 +208,7 @@ const products: ProductBi[] = [
       en: "10 ml or 20 ml in 1 glass of water, once daily.",
       gu: "૧ ગ્લાસ પાણીમાં ૧૦ મિ.લી. અથવા ૨૦ મિ.લી. — દિવસમાં એક વાર.",
     },
-    image: pSeabuckthorn.url,
+    image: pSeabuckthorn,
     notes: [
       { en: "Omega 3,6,7,9", gu: "ઓમેગા ૩,૬,૭,૯" },
       { en: "Vitamin C", gu: "વિટામિન C" },
@@ -229,7 +229,7 @@ const products: ProductBi[] = [
       en: "Mix 1 teaspoon in warm water or buttermilk. Best taken in the morning.",
       gu: "ગરમ પાણી કે છાશમાં ૧ ચમચી ભેળવો. સવારે લેવું શ્રેષ્ઠ.",
     },
-    image: pMoringaLeavesPowder.url,
+    image: pMoringaLeavesPowder,
     notes: [
       { en: "Vitamins", gu: "વિટામિન" },
       { en: "Minerals", gu: "ખનિજ" },
@@ -250,7 +250,7 @@ const products: ProductBi[] = [
       en: "Take 2 tablets with water after meals, twice a day.",
       gu: "ભોજન પછી પાણી સાથે ૨ ગોળી, દિવસમાં બે વાર લો.",
     },
-    image: pMoringaLeavesTablets.url,
+    image: pMoringaLeavesTablets,
     notes: [
       { en: "Immunity", gu: "રોગપ્રતિકારકતા" },
       { en: "Stamina", gu: "શક્તિ" },
@@ -271,7 +271,7 @@ const products: ProductBi[] = [
       en: "Mix 1 teaspoon in warm water or juice. Can be taken morning or evening.",
       gu: "ગરમ પાણી કે જ્યુસમાં ૧ ચમચી ભેળવો. સવારે કે સાંજે લઈ શકાય.",
     },
-    image: pMoringaPodsPowder.url,
+    image: pMoringaPodsPowder,
     notes: [
       { en: "Digestion", gu: "પાચન" },
       { en: "Vitality", gu: "સ્ફૂર્તિ" },
@@ -292,7 +292,7 @@ const products: ProductBi[] = [
       en: "Take 2 tablets with water after meals, morning and evening.",
       gu: "ભોજન પછી પાણી સાથે ૨ ગોળી, સવારે અને સાંજે લો.",
     },
-    image: pMoringaPodsTablets.url,
+    image: pMoringaPodsTablets,
     notes: [
       { en: "Wellness", gu: "આરોગ્ય" },
       { en: "Digestion", gu: "પાચન" },
@@ -313,7 +313,7 @@ const products: ProductBi[] = [
       en: "Take 1 tablet at night, twice a week only.",
       gu: "રાત્રે ફક્ત ૧ ગોળી — અઠવાડિયામાં બે વાર.",
     },
-    image: pMalashuddhi.url,
+    image: pMalashuddhi,
     notes: [
       { en: "Digestive", gu: "પાચન" },
       { en: "Bowel Care", gu: "કબજિયાત રાહત" },
@@ -411,12 +411,12 @@ function Nav() {
       <div className="container-x flex items-center justify-between py-4 gap-3">
         <a href="#" className="flex items-center gap-3 shrink-0">
           <img
-            src={vedaasLogo.url}
+            src={vedaasLogo}
             alt="Vedaas Greens"
             className="w-12 h-12 rounded-full object-cover bg-cream ring-2 ring-forest-deep/10"
           />
           <div className="leading-tight">
-            <div className="font-display font-bold text-xl text-forest-deep">Vedaas</div>
+            <div className="font-display font-bold text-xl text-forest-deep">Vedaas Greens</div>
             <div className="text-[0.8rem] font-medium text-forest">{t("footer_tagline", lang)}</div>
           </div>
         </a>
@@ -976,12 +976,12 @@ function Footer() {
         <div className="flex flex-wrap justify-between gap-8 items-start">
           <div className="flex items-center gap-3">
             <img
-              src={vedaasLogo.url}
+              src={vedaasLogo}
               alt="Vedaas Greens"
               className="w-11 h-11 rounded-full object-cover bg-cream"
             />
             <div>
-              <div className="font-display text-cream text-lg">Vedaas</div>
+              <div className="font-display text-cream text-lg">Vedaas Green</div>
               <div className="text-[0.65rem] uppercase tracking-[0.22em] text-cream/45 mt-0.5">
                 {t("footer_tagline", lang)}
               </div>
