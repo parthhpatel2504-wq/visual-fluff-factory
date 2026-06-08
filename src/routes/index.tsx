@@ -1019,3 +1019,5 @@ function WhatsAppFloat() {
     </a>
   );
 }
+
+export default Index;
