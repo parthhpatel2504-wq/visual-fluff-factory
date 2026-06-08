@@ -410,9 +410,11 @@ function Nav() {
     <header className="sticky top-0 z-50 border-b-2 border-forest-deep/15 backdrop-blur-md bg-background/95">
       <div className="container-x flex items-center justify-between py-4 gap-3">
         <a href="#" className="flex items-center gap-3 shrink-0">
-          <div className="grid place-items-center w-11 h-11 rounded-full bg-forest-deep text-cream font-display font-bold text-lg">
-            V
-          </div>
+          <img
+            src={vedaasLogo.url}
+            alt="Vedaas Greens"
+            className="w-12 h-12 rounded-full object-cover bg-cream ring-2 ring-forest-deep/10"
+          />
           <div className="leading-tight">
             <div className="font-display font-bold text-xl text-forest-deep">Vedaas</div>
             <div className="text-[0.8rem] font-medium text-forest">{t("footer_tagline", lang)}</div>
@@ -883,9 +885,11 @@ function Footer() {
       <div className="container-x">
         <div className="flex flex-wrap justify-between gap-8 items-start">
           <div className="flex items-center gap-3">
-            <div className="grid place-items-center w-10 h-10 rounded-full bg-ember text-forest-deep font-display font-bold">
-              V
-            </div>
+            <img
+              src={vedaasLogo.url}
+              alt="Vedaas Greens"
+              className="w-11 h-11 rounded-full object-cover bg-cream"
+            />
             <div>
               <div className="font-display text-cream text-lg">Vedaas</div>
               <div className="text-[0.65rem] uppercase tracking-[0.22em] text-cream/45 mt-0.5">
