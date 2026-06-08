@@ -4,7 +4,7 @@ import heroImg from "@/assets/hero-greens.jpg";
 import ritualImg from "@/assets/ritual.jpg";
 import pGreenJuice from "@/assets/p-green-juice.jpg";
 import pAcidity from "@/assets/p-acidity.jpg";
-import pSeabuckthorn from "@/assets/p-seabuckthorn.jpg";
+import pSeabuckthorn from "@/assets/p-seabuckthorn.jpg.jpg";
 import pMoringaLeavesPowder from "@/assets/p-moringa-leaves-powder.jpeg";
 import pMoringaLeavesTablets from "@/assets/p-moringa-leaves-tablets.jpeg";
 import pMoringaPodsPowder from "@/assets/p-moringa-pods-powder.jpeg";
