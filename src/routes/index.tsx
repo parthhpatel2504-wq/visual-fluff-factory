@@ -894,7 +894,7 @@ function Footer() {
           </nav>
         </div>
         <div className="mt-10 pt-6 border-t border-cream/10 text-xs text-cream/40 text-center">
-          © 2026 Vedaas Greens · {t("footer_copy_loc", lang)}
+          © 2026 Vedaas Greens · {t("footer_copy_loc", lang)} · {t("fssai_label", lang)} 20725038005253
         </div>
       </div>
     </footer>
