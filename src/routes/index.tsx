@@ -518,7 +518,7 @@ function Hero() {
                   ગ્રીન જ્યુસ પાવડર — {products[0].size[lang]}
                 </div>
               </div>
-              <div className="font-display text-lg text-forest-deep font-semibold">₹ 699</div>
+              <div className="font-display text-lg text-forest-deep font-semibold">₹ 350</div>
             </div>
           </div>
           <div className="absolute -top-4 -right-4 hidden lg:block w-28 h-28 rounded-full bg-ember/15 -z-10" />
