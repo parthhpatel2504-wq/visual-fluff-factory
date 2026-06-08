@@ -390,7 +390,7 @@ function LangToggle({ compact = false }: { compact?: boolean }) {
         }`}
         aria-pressed={lang === "gu"}
       >
-        ગુજરાતી
+        ગુજ
       </button>
     </div>
   );
