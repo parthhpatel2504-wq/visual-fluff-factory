@@ -599,7 +599,15 @@ function Products() {
                 </div>
                 <div className="absolute -bottom-5 -right-3 sm:-right-5 rounded-2xl bg-ember px-5 py-3 shadow-lift border-2 border-forest-deep/10">
                   <div className="text-[0.75rem] font-bold uppercase tracking-wider text-forest-deep/80">{p.size[lang]}</div>
-                  <div className="font-display text-2xl text-forest-deep font-bold leading-none">{p.price}</div>
+                  <div className="flex items-baseline gap-2 leading-none">
+                    <div className="font-display text-2xl text-forest-deep font-bold">{p.price}</div>
+                    {p.mrp && (
+                      <div className="text-sm font-semibold text-forest-deep/55 line-through">{p.mrp}</div>
+                    )}
+                  </div>
+                  {p.mrp && (
+                    <div className="text-[0.7rem] font-bold uppercase tracking-wider text-forest mt-0.5">{t("special_label", lang)}</div>
+                  )}
                 </div>
 
               </div>
