@@ -861,7 +861,7 @@ function Order() {
           <p className="text-cream/75 text-lg max-w-md leading-relaxed">{t("order_p", lang)}</p>
           <div className="space-y-4 pt-4">
             <Meta label={t("meta_whatsapp", lang)} value="+91 79906 98497" />
-            <Meta label={t("meta_email", lang)} value="orders@vedaas.in" />
+            <Meta label={t("meta_email", lang)} value="vedaasgreen@gmail.com" />
             <Meta label={t("meta_shipping_l", lang)} value={t("meta_shipping_v", lang)} />
             <Meta label={t("meta_hours_l", lang)} value={t("meta_hours_v", lang)} />
           </div>
