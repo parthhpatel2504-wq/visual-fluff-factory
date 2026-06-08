@@ -10,6 +10,7 @@ import pMoringaLeavesTablets from "@/assets/p-moringa-leaves-tablets.jpg.asset.j
 import pMoringaPodsPowder from "@/assets/p-moringa-pods-powder.jpg.asset.json";
 import pMoringaPodsTablets from "@/assets/p-moringa-pods-tablets.jpg.asset.json";
 import pMalashuddhi from "@/assets/p-malashuddhi.jpg.asset.json";
+import vedaasLogo from "@/assets/vedaas-logo.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -117,8 +118,13 @@ const T: Record<string, Bi> = {
   how_to_use: { en: "How to use", gu: "વાપરવાની રીત" },
   mrp_label: { en: "MRP", gu: "MRP" },
   special_label: { en: "Special price", gu: "ખાસ ભાવ" },
-  reviews_link: { en: "Read our Google reviews", gu: "અમારા Google રિવ્યૂ વાંચો" },
+  reviews_link: { en: "Read all reviews on Google", gu: "Google પર બધા રિવ્યૂ વાંચો" },
   fssai_label: { en: "FSSAI Lic. No.", gu: "FSSAI લાઇસન્સ નં." },
+  reviews_eyebrow: { en: "Google Reviews", gu: "Google રિવ્યૂ" },
+  reviews_h2_a: { en: "Loved by", gu: "પ્રેમ પામેલ" },
+  reviews_h2_b: { en: "real customers.", gu: "સાચા ગ્રાહકો દ્વારા." },
+  reviews_sub: { en: "Verified 5-star reviews from our Google Business page.", gu: "અમારા Google બિઝનેસ પેજ પરથી ચકાસાયેલા ૫-સ્ટાર રિવ્યૂ." },
+  reviews_ago: { en: "7 months ago", gu: "૭ મહિના પહેલા" },
 };
 
 
@@ -330,6 +336,7 @@ function Index() {
         <Products />
         <Ritual />
         <Story />
+        <Reviews />
         <Order />
         <Footer />
         <WhatsAppFloat />
@@ -403,9 +410,11 @@ function Nav() {
     <header className="sticky top-0 z-50 border-b-2 border-forest-deep/15 backdrop-blur-md bg-background/95">
       <div className="container-x flex items-center justify-between py-4 gap-3">
         <a href="#" className="flex items-center gap-3 shrink-0">
-          <div className="grid place-items-center w-11 h-11 rounded-full bg-forest-deep text-cream font-display font-bold text-lg">
-            V
-          </div>
+          <img
+            src={vedaasLogo.url}
+            alt="Vedaas Greens"
+            className="w-12 h-12 rounded-full object-cover bg-cream ring-2 ring-forest-deep/10"
+          />
           <div className="leading-tight">
             <div className="font-display font-bold text-xl text-forest-deep">Vedaas</div>
             <div className="text-[0.8rem] font-medium text-forest">{t("footer_tagline", lang)}</div>
@@ -740,6 +749,96 @@ function Story() {
   );
 }
 
+/* ---------- REVIEWS ---------- */
+const reviewsData: { name: string; meta: string; initial: string; color: string; text: string }[] = [
+  { name: "RAJ", meta: "1 review", initial: "R", color: "bg-ember/80",
+    text: "Really refreshing and tasty! You can feel it's made from fresh ingredients. Perfect healthy drink for any time of the day. Amazing juice — full of natural flavor and nutrients. No added sugar, just pure goodness. Great choice for a healthy lifestyle ✨❤️" },
+  { name: "Jeet Shinde", meta: "5 reviews", initial: "J", color: "bg-forest",
+    text: "Honestly, this is a really good product — one of the best I've tried! 🌱 It's been so helpful and useful for my daily routine. I take it every morning, and it gives me a fresh start to the day. I feel more energetic, lighter, and healthier since I started using it." },
+  { name: "Khushi Patel", meta: "1 review", initial: "K", color: "bg-moss",
+    text: "Amazing product, it helps to reduce weight and is good for glowing skin ✨" },
+  { name: "Drashti Vyas", meta: "1 review", initial: "D", color: "bg-ember",
+    text: "Best product ever — won't regret buying it. Super natural, super organic. Loved it, must buy!" },
+  { name: "Krish Patel", meta: "4 reviews", initial: "K", color: "bg-forest-deep",
+    text: "Good and authentic product. It is very useful. Recommended product for all." },
+  { name: "Mihir Jayswal", meta: "8 reviews", initial: "M", color: "bg-moss/80",
+    text: "Very healthy. Works like detox water." },
+  { name: "Shilpa Patel", meta: "2 reviews", initial: "S", color: "bg-sage",
+    text: "So useful for body and glowing skin." },
+  { name: "Vedi Patel", meta: "6 reviews", initial: "V", color: "bg-ember/70",
+    text: "It has an amazing taste and is very healthy." },
+  { name: "Patel Rudra", meta: "Local Guide · 65 reviews", initial: "P", color: "bg-forest",
+    text: "Very healthy juice and also organic." },
+  { name: "Margi Patel", meta: "4 reviews", initial: "M", color: "bg-moss",
+    text: "Really good for health." },
+  { name: "Meshvi Patel", meta: "2 reviews", initial: "M", color: "bg-sage/80",
+    text: "It is so good and beneficial." },
+  { name: "Shivam Patel", meta: "4 reviews", initial: "S", color: "bg-ember",
+    text: "Very helpful for winter 👍" },
+];
+
+function Reviews() {
+  const { lang } = useLang();
+  return (
+    <section id="reviews" className="py-24 lg:py-32 bg-sage/10">
+      <div className="container-x">
+        <div className="max-w-3xl mx-auto text-center space-y-5 mb-12">
+          <div className="eyebrow">{t("reviews_eyebrow", lang)}</div>
+          <h2 className="font-display text-4xl md:text-5xl text-forest-deep leading-tight">
+            {t("reviews_h2_a", lang)}{" "}
+            <span className="italic text-moss font-normal">{t("reviews_h2_b", lang)}</span>
+          </h2>
+          <p className="text-lg text-muted-foreground leading-relaxed">{t("reviews_sub", lang)}</p>
+          <div className="flex items-center justify-center gap-3 pt-2">
+            <div className="text-2xl tracking-wider text-ember">★★★★★</div>
+            <div className="text-base font-semibold text-forest-deep">5.0 · Google</div>
+          </div>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {reviewsData.map((r, i) => (
+            <article
+              key={i}
+              className="rounded-2xl bg-cream border-2 border-forest-deep/10 p-6 shadow-soft flex flex-col"
+            >
+              <header className="flex items-start gap-3 mb-3">
+                <div className={`grid place-items-center w-11 h-11 rounded-full text-cream font-display font-bold text-lg shrink-0 ${r.color}`}>
+                  {r.initial}
+                </div>
+                <div className="leading-tight">
+                  <div className="font-semibold text-forest-deep text-base">{r.name}</div>
+                  <div className="text-xs text-muted-foreground mt-0.5">{r.meta}</div>
+                </div>
+                <svg viewBox="0 0 48 48" className="w-6 h-6 ml-auto shrink-0" aria-label="Google">
+                  <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                  <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                  <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                  <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                </svg>
+              </header>
+              <div className="flex items-center gap-2 mb-3 text-ember text-lg">
+                ★★★★★ <span className="text-xs text-muted-foreground font-medium">· {t("reviews_ago", lang)}</span>
+              </div>
+              <p className="text-[0.98rem] leading-relaxed text-foreground/85">{r.text}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="text-center mt-10">
+          <a
+            href="https://www.google.com/search?q=Vedaas+Greens+Ahmedabad"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-forest-deep px-6 py-3 text-base font-semibold text-cream hover:bg-forest transition shadow-soft"
+          >
+            ★ {t("reviews_link", lang)} →
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ---------- ORDER ---------- */
 function Order() {
   const { lang } = useLang();
@@ -876,9 +975,11 @@ function Footer() {
       <div className="container-x">
         <div className="flex flex-wrap justify-between gap-8 items-start">
           <div className="flex items-center gap-3">
-            <div className="grid place-items-center w-10 h-10 rounded-full bg-ember text-forest-deep font-display font-bold">
-              V
-            </div>
+            <img
+              src={vedaasLogo.url}
+              alt="Vedaas Greens"
+              className="w-11 h-11 rounded-full object-cover bg-cream"
+            />
             <div>
               <div className="font-display text-cream text-lg">Vedaas</div>
               <div className="text-[0.65rem] uppercase tracking-[0.22em] text-cream/45 mt-0.5">
