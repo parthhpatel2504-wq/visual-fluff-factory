@@ -416,7 +416,7 @@ function Nav() {
             className="w-12 h-12 rounded-full object-cover bg-cream ring-2 ring-forest-deep/10"
           />
           <div className="leading-tight">
-            <div className="font-display font-bold text-xl text-forest-deep">Vedaas Greens</div>
+            <div className="font-display font-bold text-lg text-forest-deep">Vedaas Greens</div>
             <div className="text-[0.8rem] font-medium text-forest">{t("footer_tagline", lang)}</div>
           </div>
         </a>
@@ -981,7 +981,7 @@ function Footer() {
               className="w-11 h-11 rounded-full object-cover bg-cream"
             />
             <div>
-              <div className="font-display text-cream text-lg">Vedaas Green</div>
+              <div className="font-display text-cream text-lg">Vedaas Greens</div>
               <div className="text-[0.65rem] uppercase tracking-[0.22em] text-cream/45 mt-0.5">
                 {t("footer_tagline", lang)}
               </div>
