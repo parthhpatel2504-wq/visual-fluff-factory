@@ -100,6 +100,9 @@ const T: Record<string, Bi> = {
   field_product: { en: "Product", gu: "ઉત્પાદન" },
   field_qty: { en: "Quantity", gu: "જથ્થો" },
   field_city: { en: "City", gu: "શહેર" },
+  field_address: { en: "Full delivery address", gu: "સંપૂર્ણ સરનામું" },
+  field_address_ph: { en: "House / Flat, street, area, city, pincode", gu: "ઘર / ફ્લેટ, શેરી, વિસ્તાર, શહેર, પીનકોડ" },
+  field_phone: { en: "Phone number", gu: "ફોન નંબર" },
   field_notes: { en: "Notes (optional)", gu: "નોંધ (વૈકલ્પિક)" },
   field_notes_ph: { en: "Anything we should know?", gu: "કંઈ ખાસ જણાવવું છે?" },
   submit_btn: { en: "Send order on WhatsApp →", gu: "WhatsApp પર ઓર્ડર મોકલો →" },
@@ -112,6 +115,10 @@ const T: Record<string, Bi> = {
   price_strip_b: { en: "Free delivery", gu: "મફત ડિલિવરી" },
   price_strip_c: { en: "Cash on delivery", gu: "ડિલિવરી પર પેમેન્ટ" },
   how_to_use: { en: "How to use", gu: "વાપરવાની રીત" },
+  mrp_label: { en: "MRP", gu: "MRP" },
+  special_label: { en: "Special price", gu: "ખાસ ભાવ" },
+  reviews_link: { en: "Read our Google reviews", gu: "અમારા Google રિવ્યૂ વાંચો" },
+  fssai_label: { en: "FSSAI Lic. No.", gu: "FSSAI લાઇસન્સ નં." },
 };
 
 
