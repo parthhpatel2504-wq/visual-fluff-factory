@@ -2,15 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { createContext, useContext, useState } from "react";
 import heroImg from "@/assets/hero-greens.jpg";
 import ritualImg from "@/assets/ritual.jpg";
-import pGreenJuice from "@/assets/p-green-juice.jpg.asset.json";
-import pAcidity from "@/assets/p-acidity.jpg.asset.json";
-import pSeabuckthorn from "@/assets/p-seabuckthorn.jpg.asset.json";
-import pMoringaLeavesPowder from "@/assets/p-moringa-leaves-powder.jpg.asset.json";
-import pMoringaLeavesTablets from "@/assets/p-moringa-leaves-tablets.jpg.asset.json";
-import pMoringaPodsPowder from "@/assets/p-moringa-pods-powder.jpg.asset.json";
-import pMoringaPodsTablets from "@/assets/p-moringa-pods-tablets.jpg.asset.json";
-import pMalashuddhi from "@/assets/p-malashuddhi.jpg.asset.json";
-import vedaasLogo from "@/assets/vedaas-logo.jpg.asset.json";
+import pGreenJuice from "@/assets/p-green-juice.jpg";
+import pAcidity from "@/assets/p-acidity.jpg";
+import pSeabuckthorn from "@/assets/p-seabuckthorn.jpg";
+import pMoringaLeavesPowder from "@/assets/p-moringa-leaves-powder.jpeg";
+import pMoringaLeavesTablets from "@/assets/p-moringa-leaves-tablets.jpeg";
+import pMoringaPodsPowder from "@/assets/p-moringa-pods-powder.jpeg";
+import pMoringaPodsTablets from "@/assets/p-moringa-pods-tablets.jpeg";
+import pMalashuddhi from "@/assets/p-malashuddhi.jpeg";
+import vedaasLogo from "@/assets/vedaas-logo.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
