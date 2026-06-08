@@ -724,12 +724,15 @@ function Story() {
             <span className="italic text-moss font-normal">{t("story_h2_b", lang)}</span>
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">{t("story_p", lang)}</p>
-          <div className="pt-4 flex justify-center gap-3 text-xs uppercase tracking-wider text-muted-foreground">
+          <div className="pt-4 flex flex-wrap justify-center gap-x-3 gap-y-2 text-xs uppercase tracking-wider text-muted-foreground">
             <span>{t("badge_fssai", lang)}</span>
             <span aria-hidden>·</span>
             <span>{t("badge_made", lang)}</span>
             <span aria-hidden>·</span>
             <span>{t("badge_vegan", lang)}</span>
+          </div>
+          <div className="text-sm font-semibold text-forest-deep">
+            {t("fssai_label", lang)}: <span className="font-mono tracking-wide">20725038005253</span>
           </div>
         </div>
       </div>
