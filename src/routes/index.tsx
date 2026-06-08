@@ -10,6 +10,7 @@ import pMoringaLeavesTablets from "@/assets/p-moringa-leaves-tablets.jpg.asset.j
 import pMoringaPodsPowder from "@/assets/p-moringa-pods-powder.jpg.asset.json";
 import pMoringaPodsTablets from "@/assets/p-moringa-pods-tablets.jpg.asset.json";
 import pMalashuddhi from "@/assets/p-malashuddhi.jpg.asset.json";
+import vedaasLogo from "@/assets/vedaas-logo.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -117,8 +118,13 @@ const T: Record<string, Bi> = {
   how_to_use: { en: "How to use", gu: "વાપરવાની રીત" },
   mrp_label: { en: "MRP", gu: "MRP" },
   special_label: { en: "Special price", gu: "ખાસ ભાવ" },
-  reviews_link: { en: "Read our Google reviews", gu: "અમારા Google રિવ્યૂ વાંચો" },
+  reviews_link: { en: "Read all reviews on Google", gu: "Google પર બધા રિવ્યૂ વાંચો" },
   fssai_label: { en: "FSSAI Lic. No.", gu: "FSSAI લાઇસન્સ નં." },
+  reviews_eyebrow: { en: "Google Reviews", gu: "Google રિવ્યૂ" },
+  reviews_h2_a: { en: "Loved by", gu: "પ્રેમ પામેલ" },
+  reviews_h2_b: { en: "real customers.", gu: "સાચા ગ્રાહકો દ્વારા." },
+  reviews_sub: { en: "Verified 5-star reviews from our Google Business page.", gu: "અમારા Google બિઝનેસ પેજ પરથી ચકાસાયેલા ૫-સ્ટાર રિવ્યૂ." },
+  reviews_ago: { en: "7 months ago", gu: "૭ મહિના પહેલા" },
 };
 
 
@@ -330,6 +336,7 @@ function Index() {
         <Products />
         <Ritual />
         <Story />
+        <Reviews />
         <Order />
         <Footer />
         <WhatsAppFloat />
