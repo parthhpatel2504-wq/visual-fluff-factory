@@ -304,8 +304,8 @@ const products: ProductBi[] = [
       gu: "પાચન અને કબજિયાતમાં રાહત માટે પારંપરિક રીતે ઉપયોગી. દૈનિક પાચન આરામ અને નિયમિતતા જાળવે.",
     },
     howto: {
-      en: "Take 1–2 tablets with warm water at bedtime for smooth morning routine.",
-      gu: "સૂતી વખતે ગરમ પાણી સાથે ૧–૨ ગોળી લો. સવારે આરામદાયક અનુભવ થાય.",
+      en: "Take 1 tablet at night, twice a week only.",
+      gu: "રાત્રે ફક્ત ૧ ગોળી — અઠવાડિયામાં બે વાર.",
     },
     image: pMalashuddhi.url,
     notes: [
