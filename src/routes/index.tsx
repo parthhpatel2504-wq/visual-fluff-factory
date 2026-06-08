@@ -413,10 +413,10 @@ function Nav() {
           <img
             src={vedaasLogo}
             alt="Vedaas Greens"
-            className="w-12 h-12 rounded-full object-cover bg-cream ring-2 ring-forest-deep/10"
+            className="w-10 h-10 rounded-full object-cover bg-cream ring-2 ring-forest-deep/10"
           />
           <div className="leading-tight">
-            <div className="font-display font-bold text-lg text-forest-deep">Vedaas Greens</div>
+            <div className="font-display font-bold text-base text-forest-deep">Vedaas Greens</div>
             <div className="text-[0.8rem] font-medium text-forest">{t("footer_tagline", lang)}</div>
           </div>
         </a>
